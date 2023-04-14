@@ -1,0 +1,197 @@
+Medical data does NOT contain any missing values
+
+count    10000.000000
+mean         2.097200
+std          2.163659
+min          0.000000
+25%          0.000000
+50%          1.000000
+75%          3.000000
+max         10.000000
+Name: Children, dtype: float64
+
+count    10000.000000
+mean        53.511700
+std         20.638538
+min         18.000000
+25%         36.000000
+50%         53.000000
+75%         71.000000
+max         89.000000
+Name: Age, dtype: float64
+
+count     10000.000000
+mean      40490.495160
+std       28521.153293
+min         154.080000
+25%       19598.775000
+50%       33768.420000
+75%       54296.402500
+max      207249.100000
+Name: Income, dtype: float64
+
+count      10000
+unique         3
+top       Female
+freq        5018
+Name: Gender, dtype: object
+
+count     10000
+unique        2
+top           0
+freq       6331
+Name: ReAdmis, dtype: int64
+
+count    10000.000000
+mean        17.964262
+std          2.017231
+min          9.806483
+25%         16.626439
+50%         17.951122
+75%         19.347963
+max         26.394449
+Name: VitD_levels, dtype: float64
+
+count    10000.000000
+mean         5.012200
+std          1.045734
+min          1.000000
+25%          4.000000
+50%          5.000000
+75%          6.000000
+max          9.000000
+Name: Doc_visits, dtype: float64
+
+count    10000.000000
+mean         1.001400
+std          1.008117
+min          0.000000
+25%          0.000000
+50%          1.000000
+75%          2.000000
+max          7.000000
+Name: Full_meals_eaten, dtype: float64
+
+count    10000.000000
+mean         0.398900
+std          0.628505
+min          0.000000
+25%          0.000000
+50%          0.000000
+75%          1.000000
+max          5.000000
+Name: vitD_supp, dtype: float64
+
+count     10000
+unique        2
+top           0
+freq       7425
+Name: Soft_drink, dtype: int64
+
+count     10000
+unique        3
+top           0
+freq       5060
+Name: Initial_admin, dtype: int64
+
+count     10000
+unique        2
+top           0
+freq       5910
+Name: HighBlood, dtype: int64
+
+count     10000
+unique        2
+top           0
+freq       8007
+Name: Stroke, dtype: int64
+
+count     10000
+unique        3
+top           1
+freq       4517
+Name: Complication_risk, dtype: int64
+
+count     10000
+unique        2
+top           1
+freq       7094
+Name: Overweight, dtype: int64
+
+count     10000
+unique        2
+top           0
+freq       6426
+Name: Arthritis, dtype: int64
+
+count     10000
+unique        2
+top           0
+freq       7262
+Name: Diabetes, dtype: int64
+
+count     10000
+unique        2
+top           0
+freq       6628
+Name: Hyperlipidemia, dtype: int64
+
+count     10000
+unique        2
+top           0
+freq       5886
+Name: BackPain, dtype: int64
+
+count     10000
+unique        2
+top           0
+freq       6785
+Name: Anxiety, dtype: int64
+
+count     10000
+unique        2
+top           0
+freq       6059
+Name: Allergic_rhinitis, dtype: int64
+
+count     10000
+unique        2
+top           0
+freq       5865
+Name: Reflux_esophagitis, dtype: int64
+
+count     10000
+unique        2
+top           0
+freq       7107
+Name: Asthma, dtype: int64
+
+count    10000.000000
+mean        34.455299
+std         26.309341
+min          1.001981
+25%          7.896215
+50%         35.836244
+75%         61.161020
+max         71.981490
+Name: Initial_days, dtype: float64
+
+count    10000.000000
+mean      5312.172769
+std       2180.393838
+min       1938.312067
+25%       3179.374015
+50%       5213.952000
+75%       7459.699750
+max       9180.728000
+Name: TotalCharge, dtype: float64
+
+count    10000.000000
+mean     12934.528587
+std       6542.601544
+min       3125.703000
+25%       7986.487755
+50%      11573.977735
+75%      15626.490000
+max      30566.070000
+Name: Additional_charges, dtype: float64

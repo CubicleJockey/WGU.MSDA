@@ -1,0 +1,16 @@
+**On pursuing your own projects**
+You can enhance your data analytics skills by pursuing projects that hold significant interest for you. I completed such a project the first week of February. I envisioned a graphic that would encapsulate the student experience in each course and created the enhanced boxplots in the Days in Course PDF file. 
+
+
+**On reading these boxplots**
+1) The lower end of the box is the 1st quartile (Q1) -- 25% of all students completed the course in that many days or less and 75% took longer to complete the course.
+2) The middle line in the box is the 2nd quartile (Q2), the median -- Half of all students completed the course in less than that many days and half of all students completed the course in more than that many days.
+3) The upper end of the box is the 3rd quartile (Q3) -- 75% of all students completed the course in that many days or less and 25% took longer to complete the course.
+4) The upper fence is the mathematical boundary for outliers, calculated as [Q3 + (1.5 * Inter Quartile Range)] where [Inter Quartile Range = Q3 - Q1].
+5) The yellow dot is the mean number of days to complete the course. A mean greater than the median indicates a positive skew (i.e., a longer tail on the right). A mean less than the median indicates a negative skew (i.e., a longer tail on the left). Skewness was calculated as the adjusted Fisher-Pearson standardized moment coefficient. 
+
+
+**On methodology**
+* This project was completed in R.
+* Data was retrieved from the course search in Caseload, which limits data access to six months.
+* Students who started a course more than 14 days before finishing the previous course were eliminated from the dataset. The 14 days is arbitrary. The goal was to remove the data where a student clicks to start a course long before they intend to make progress on that course. 

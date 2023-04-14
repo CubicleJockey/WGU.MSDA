@@ -1,0 +1,49 @@
+MOVING FILES TO AND FROM THE LABS ON DEMAND DESKTOP
+
+There are two ways to upload or download files to and from the VM (Labs on Demand).
+
+First method
+
+Step 1. Email files to yourself using a Yahoo or Gmail email account. 
+
+Step 2 Log on to the virtual desktop.
+
+Step 3. Open a browser on the virtual desktop.
+
+Step 4. Connect to your Yahoo or Gmail account.
+
+Step 5. Open your email and access your files, save to the desktop.
+
+
+
+
+
+Second Method:
+
+Step 1. Open a browser.
+
+Step 2. Type in a shared document link. (You can create this link as a Microsoft OneDrive link by clicking on the file and sharing it).
+
+Step 3. You will see a dialog box that says the link has been removed.
+
+
+
+
+
+So, the trick is when the error page appears like above, just click the small link "Go back to site". Then, it will prompt you to login with your WGU credentials. Next, select Shared files (like the screenshot below) and navigate to the file you want to upload to the VM.
+
+
+
+Dr. William Sewell
+
+Course Instructor, College of Information Technology
+
+Western Governors University
+
+Toll Free 1.877.435.7948 Ext. 5377
+
+My Text Number: 954.802.2225
+
+william.sewell@wgu.edu 
+
+Mountain Time Office hours: Sun 1:00 PM–8:00 PM, Mon 6:00 AM–3:30 PM, Tue 9:30 AM–6:30 PM, Wed 9:00 AM–5:00 PM, Thu 6:00 AM–3:30 PM

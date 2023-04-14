@@ -1,0 +1,294 @@
+Backwards Elimination #1: Eliminate highest p-value above 0.10 
+
+Optimization terminated successfully.
+         Current function value: 0.039073
+         Iterations 13
+                           Logit Regression Results                           
+==============================================================================
+Dep. Variable:                ReAdmis   No. Observations:                10000
+Model:                          Logit   Df Residuals:                     9984
+Method:                           MLE   Df Model:                           15
+Date:                Fri, 31 Mar 2023   Pseudo R-squ.:                  0.9406
+Time:                        21:54:16   Log-Likelihood:                -390.73
+converged:                       True   LL-Null:                       -6572.9
+Covariance Type:            nonrobust   LLR p-value:                     0.000
+=================================================================================================
+                                    coef    std err          z      P>|z|      [0.025      0.975]
+-------------------------------------------------------------------------------------------------
+Children                          0.0638      0.042      1.531      0.126      -0.018       0.146
+Age                               0.0016      0.004      0.351      0.725      -0.007       0.010
+HighBlood                         0.7452      0.196      3.803      0.000       0.361       1.129
+Overweight                       -0.1770      0.206     -0.859      0.390      -0.581       0.227
+Arthritis                        -1.1579      0.203     -5.698      0.000      -1.556      -0.760
+Diabetes                          0.3678      0.207      1.777      0.076      -0.038       0.774
+BackPain                          0.1789      0.186      0.960      0.337      -0.187       0.544
+Asthma                           -1.1671      0.211     -5.534      0.000      -1.580      -0.754
+Initial_days                      1.2437      0.064     19.483      0.000       1.119       1.369
+complication_risk_medium         -0.3369      0.214     -1.573      0.116      -0.757       0.083
+complication_risk_low            -1.4936      0.263     -5.680      0.000      -2.009      -0.978
+initial_admission_emergency       2.1262      0.249      8.553      0.000       1.639       2.613
+initial_admission_observation     0.7318      0.256      2.860      0.004       0.230       1.233
+gender_male                       0.2808      0.188      1.493      0.135      -0.088       0.650
+gender_non_binary                 0.5002      0.658      0.760      0.447      -0.790       1.790
+const                           -68.2532      3.502    -19.492      0.000     -75.116     -61.390
+=================================================================================================
+
+Possibly complete quasi-separation: A fraction 0.79 of observations can be
+perfectly predicted. This might indicate that there is complete
+quasi-separation. In this case some parameters will not be identified.
+-------------------------------------------------------------------------------------------
+
+"Age" is to be removed with a value of [0.7252942946057662]
+
+-------------------------------------------------------------------------------------------
+
+
+Backwards Elimination #2: Eliminate highest p-value above 0.10 
+
+Optimization terminated successfully.
+         Current function value: 0.039079
+         Iterations 13
+                           Logit Regression Results                           
+==============================================================================
+Dep. Variable:                ReAdmis   No. Observations:                10000
+Model:                          Logit   Df Residuals:                     9985
+Method:                           MLE   Df Model:                           14
+Date:                Fri, 31 Mar 2023   Pseudo R-squ.:                  0.9405
+Time:                        21:54:16   Log-Likelihood:                -390.79
+converged:                       True   LL-Null:                       -6572.9
+Covariance Type:            nonrobust   LLR p-value:                     0.000
+=================================================================================================
+                                    coef    std err          z      P>|z|      [0.025      0.975]
+-------------------------------------------------------------------------------------------------
+Children                          0.0639      0.042      1.530      0.126      -0.018       0.146
+HighBlood                         0.7459      0.196      3.808      0.000       0.362       1.130
+Overweight                       -0.1757      0.206     -0.854      0.393      -0.579       0.228
+Arthritis                        -1.1565      0.203     -5.692      0.000      -1.555      -0.758
+Diabetes                          0.3623      0.206      1.756      0.079      -0.042       0.767
+BackPain                          0.1801      0.186      0.966      0.334      -0.185       0.545
+Asthma                           -1.1687      0.211     -5.540      0.000      -1.582      -0.755
+Initial_days                      1.2447      0.064     19.497      0.000       1.120       1.370
+complication_risk_medium         -0.3410      0.214     -1.595      0.111      -0.760       0.078
+complication_risk_low            -1.4941      0.263     -5.682      0.000      -2.010      -0.979
+initial_admission_emergency       2.1231      0.248      8.550      0.000       1.636       2.610
+initial_admission_observation     0.7310      0.256      2.858      0.004       0.230       1.232
+gender_male                       0.2778      0.188      1.478      0.139      -0.090       0.646
+gender_non_binary                 0.4909      0.658      0.746      0.456      -0.798       1.780
+const                           -68.2163      3.501    -19.485      0.000     -75.078     -61.355
+=================================================================================================
+
+Possibly complete quasi-separation: A fraction 0.79 of observations can be
+perfectly predicted. This might indicate that there is complete
+quasi-separation. In this case some parameters will not be identified.
+-------------------------------------------------------------------------------------------
+
+"gender_non_binary" is to be removed with a value of [0.4555080882648317]
+
+-------------------------------------------------------------------------------------------
+
+
+Backwards Elimination #3: Eliminate highest p-value above 0.10 
+
+Optimization terminated successfully.
+         Current function value: 0.039108
+         Iterations 13
+                           Logit Regression Results                           
+==============================================================================
+Dep. Variable:                ReAdmis   No. Observations:                10000
+Model:                          Logit   Df Residuals:                     9986
+Method:                           MLE   Df Model:                           13
+Date:                Fri, 31 Mar 2023   Pseudo R-squ.:                  0.9405
+Time:                        21:54:16   Log-Likelihood:                -391.08
+converged:                       True   LL-Null:                       -6572.9
+Covariance Type:            nonrobust   LLR p-value:                     0.000
+=================================================================================================
+                                    coef    std err          z      P>|z|      [0.025      0.975]
+-------------------------------------------------------------------------------------------------
+Children                          0.0676      0.041      1.631      0.103      -0.014       0.149
+HighBlood                         0.7441      0.196      3.799      0.000       0.360       1.128
+Overweight                       -0.1704      0.206     -0.829      0.407      -0.573       0.232
+Arthritis                        -1.1508      0.203     -5.671      0.000      -1.548      -0.753
+Diabetes                          0.3693      0.206      1.792      0.073      -0.035       0.773
+BackPain                          0.1881      0.186      1.011      0.312      -0.177       0.553
+Asthma                           -1.1645      0.211     -5.529      0.000      -1.577      -0.752
+Initial_days                      1.2440      0.064     19.515      0.000       1.119       1.369
+complication_risk_medium         -0.3338      0.214     -1.563      0.118      -0.752       0.085
+complication_risk_low            -1.4984      0.263     -5.699      0.000      -2.014      -0.983
+initial_admission_emergency       2.1032      0.246      8.539      0.000       1.620       2.586
+initial_admission_observation     0.7211      0.255      2.825      0.005       0.221       1.222
+gender_male                       0.2569      0.186      1.383      0.167      -0.107       0.621
+const                           -68.1665      3.496    -19.500      0.000     -75.018     -61.315
+=================================================================================================
+
+Possibly complete quasi-separation: A fraction 0.79 of observations can be
+perfectly predicted. This might indicate that there is complete
+quasi-separation. In this case some parameters will not be identified.
+-------------------------------------------------------------------------------------------
+
+"Overweight" is to be removed with a value of [0.40703045826307804]
+
+-------------------------------------------------------------------------------------------
+
+
+Backwards Elimination #4: Eliminate highest p-value above 0.10 
+
+Optimization terminated successfully.
+         Current function value: 0.039142
+         Iterations 13
+                           Logit Regression Results                           
+==============================================================================
+Dep. Variable:                ReAdmis   No. Observations:                10000
+Model:                          Logit   Df Residuals:                     9987
+Method:                           MLE   Df Model:                           12
+Date:                Fri, 31 Mar 2023   Pseudo R-squ.:                  0.9404
+Time:                        21:54:16   Log-Likelihood:                -391.42
+converged:                       True   LL-Null:                       -6572.9
+Covariance Type:            nonrobust   LLR p-value:                     0.000
+=================================================================================================
+                                    coef    std err          z      P>|z|      [0.025      0.975]
+-------------------------------------------------------------------------------------------------
+Children                          0.0694      0.041      1.676      0.094      -0.012       0.151
+HighBlood                         0.7316      0.195      3.750      0.000       0.349       1.114
+Arthritis                        -1.1601      0.203     -5.726      0.000      -1.557      -0.763
+Diabetes                          0.3714      0.206      1.803      0.071      -0.032       0.775
+BackPain                          0.1933      0.186      1.040      0.298      -0.171       0.558
+Asthma                           -1.1660      0.211     -5.536      0.000      -1.579      -0.753
+Initial_days                      1.2408      0.063     19.572      0.000       1.117       1.365
+complication_risk_medium         -0.3245      0.213     -1.521      0.128      -0.742       0.094
+complication_risk_low            -1.4940      0.263     -5.685      0.000      -2.009      -0.979
+initial_admission_emergency       2.0959      0.246      8.510      0.000       1.613       2.579
+initial_admission_observation     0.7123      0.255      2.793      0.005       0.212       1.212
+gender_male                       0.2618      0.186      1.410      0.158      -0.102       0.626
+const                           -68.1147      3.486    -19.538      0.000     -74.948     -61.282
+=================================================================================================
+
+Possibly complete quasi-separation: A fraction 0.79 of observations can be
+perfectly predicted. This might indicate that there is complete
+quasi-separation. In this case some parameters will not be identified.
+-------------------------------------------------------------------------------------------
+
+"BackPain" is to be removed with a value of [0.2983122182773936]
+
+-------------------------------------------------------------------------------------------
+
+
+Backwards Elimination #5: Eliminate highest p-value above 0.10 
+
+Optimization terminated successfully.
+         Current function value: 0.039196
+         Iterations 13
+                           Logit Regression Results                           
+==============================================================================
+Dep. Variable:                ReAdmis   No. Observations:                10000
+Model:                          Logit   Df Residuals:                     9988
+Method:                           MLE   Df Model:                           11
+Date:                Fri, 31 Mar 2023   Pseudo R-squ.:                  0.9404
+Time:                        21:54:16   Log-Likelihood:                -391.96
+converged:                       True   LL-Null:                       -6572.9
+Covariance Type:            nonrobust   LLR p-value:                     0.000
+=================================================================================================
+                                    coef    std err          z      P>|z|      [0.025      0.975]
+-------------------------------------------------------------------------------------------------
+Children                          0.0690      0.041      1.667      0.096      -0.012       0.150
+HighBlood                         0.7329      0.195      3.764      0.000       0.351       1.115
+Arthritis                        -1.1616      0.202     -5.743      0.000      -1.558      -0.765
+Diabetes                          0.3711      0.206      1.799      0.072      -0.033       0.776
+Asthma                           -1.1700      0.210     -5.561      0.000      -1.582      -0.758
+Initial_days                      1.2402      0.063     19.570      0.000       1.116       1.364
+complication_risk_medium         -0.3175      0.213     -1.491      0.136      -0.735       0.100
+complication_risk_low            -1.4926      0.262     -5.691      0.000      -2.007      -0.979
+initial_admission_emergency       2.0972      0.246      8.539      0.000       1.616       2.579
+initial_admission_observation     0.7128      0.255      2.800      0.005       0.214       1.212
+gender_male                       0.2568      0.185      1.385      0.166      -0.107       0.620
+const                           -67.9995      3.481    -19.536      0.000     -74.822     -61.177
+=================================================================================================
+
+Possibly complete quasi-separation: A fraction 0.79 of observations can be
+perfectly predicted. This might indicate that there is complete
+quasi-separation. In this case some parameters will not be identified.
+-------------------------------------------------------------------------------------------
+
+"gender_male" is to be removed with a value of [0.16596786484463233]
+
+-------------------------------------------------------------------------------------------
+
+
+Backwards Elimination #6: Eliminate highest p-value above 0.10 
+
+Optimization terminated successfully.
+         Current function value: 0.039292
+         Iterations 13
+                           Logit Regression Results                           
+==============================================================================
+Dep. Variable:                ReAdmis   No. Observations:                10000
+Model:                          Logit   Df Residuals:                     9989
+Method:                           MLE   Df Model:                           10
+Date:                Fri, 31 Mar 2023   Pseudo R-squ.:                  0.9402
+Time:                        21:54:16   Log-Likelihood:                -392.92
+converged:                       True   LL-Null:                       -6572.9
+Covariance Type:            nonrobust   LLR p-value:                     0.000
+=================================================================================================
+                                    coef    std err          z      P>|z|      [0.025      0.975]
+-------------------------------------------------------------------------------------------------
+Children                          0.0700      0.041      1.695      0.090      -0.011       0.151
+HighBlood                         0.7155      0.194      3.696      0.000       0.336       1.095
+Arthritis                        -1.1395      0.201     -5.669      0.000      -1.533      -0.745
+Diabetes                          0.3648      0.206      1.771      0.077      -0.039       0.768
+Asthma                           -1.1563      0.210     -5.517      0.000      -1.567      -0.745
+Initial_days                      1.2386      0.063     19.593      0.000       1.115       1.363
+complication_risk_medium         -0.3353      0.212     -1.578      0.115      -0.752       0.081
+complication_risk_low            -1.5098      0.262     -5.773      0.000      -2.022      -0.997
+initial_admission_emergency       2.0811      0.245      8.507      0.000       1.602       2.561
+initial_admission_observation     0.7076      0.254      2.785      0.005       0.210       1.205
+const                           -67.7783      3.465    -19.562      0.000     -74.569     -60.987
+=================================================================================================
+
+Possibly complete quasi-separation: A fraction 0.79 of observations can be
+perfectly predicted. This might indicate that there is complete
+quasi-separation. In this case some parameters will not be identified.
+-------------------------------------------------------------------------------------------
+
+"complication_risk_medium" is to be removed with a value of [0.11451581091430595]
+
+-------------------------------------------------------------------------------------------
+
+
+Backwards Elimination #7: Eliminate highest p-value above 0.10 
+
+Optimization terminated successfully.
+         Current function value: 0.039418
+         Iterations 13
+                           Logit Regression Results                           
+==============================================================================
+Dep. Variable:                ReAdmis   No. Observations:                10000
+Model:                          Logit   Df Residuals:                     9990
+Method:                           MLE   Df Model:                            9
+Date:                Fri, 31 Mar 2023   Pseudo R-squ.:                  0.9400
+Time:                        21:54:16   Log-Likelihood:                -394.18
+converged:                       True   LL-Null:                       -6572.9
+Covariance Type:            nonrobust   LLR p-value:                     0.000
+=================================================================================================
+                                    coef    std err          z      P>|z|      [0.025      0.975]
+-------------------------------------------------------------------------------------------------
+Children                          0.0738      0.041      1.790      0.074      -0.007       0.155
+HighBlood                         0.7065      0.193      3.660      0.000       0.328       1.085
+Arthritis                        -1.1347      0.201     -5.653      0.000      -1.528      -0.741
+Diabetes                          0.3728      0.206      1.814      0.070      -0.030       0.776
+Asthma                           -1.1545      0.209     -5.514      0.000      -1.565      -0.744
+Initial_days                      1.2330      0.063     19.651      0.000       1.110       1.356
+complication_risk_low            -1.3126      0.228     -5.767      0.000      -1.759      -0.866
+initial_admission_emergency       2.0769      0.244      8.519      0.000       1.599       2.555
+initial_admission_observation     0.6949      0.254      2.739      0.006       0.198       1.192
+const                           -67.6687      3.449    -19.619      0.000     -74.429     -60.908
+=================================================================================================
+
+Possibly complete quasi-separation: A fraction 0.79 of observations can be
+perfectly predicted. This might indicate that there is complete
+quasi-separation. In this case some parameters will not be identified.
+
+No Backwards Eliminations are required.
+
+Remaining explanatory variables are [Index(['Children', 'HighBlood', 'Arthritis', 'Diabetes', 'Asthma',
+       'Initial_days', 'complication_risk_low', 'initial_admission_emergency',
+       'initial_admission_observation', 'const'],
+      dtype='object')]
