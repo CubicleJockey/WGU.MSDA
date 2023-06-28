@@ -30,6 +30,8 @@ try:
 except ImportError:
     print('[psycopg2] is not installed, installing now...')
     subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'psycopg2-binary'])
+    import psycopg2
+    print('[psycopg2] is now installed and being used ')
 
 try:
     import pandas as pd
@@ -37,6 +39,8 @@ try:
 except ImportError:
     print('[pandas] is not installed, installing now...')
     subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'pandas'])
+    import pandas as pd
+    print('[pandas] is now installed and being used')
     
 try:
     import numpy as np
@@ -44,6 +48,8 @@ try:
 except ImportError:
     print('[numpy] is not installed, installing now...')
     subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'numpy'])
+    import numpy as np
+    print('[numpy] is now installed and being used')
 
 '''
     Helper Functions

@@ -14,7 +14,7 @@ SELECT p.children
 	  ,p.soft_drink
 	  ,p.hignblood AS "HighBlood"
 	  ,p.stroke
-	  ,l.zip
+	  ,CAST(l.zip AS TEXT) AS "Zip"
 	  ,l.city
 	  ,l.state
 	  ,l.county
