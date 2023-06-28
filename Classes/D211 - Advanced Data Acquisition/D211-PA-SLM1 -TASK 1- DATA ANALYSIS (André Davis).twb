@@ -5,6 +5,9 @@
   <document-format-change-manifest>
     <_.fcp.AnimationOnByDefault.true...AnimationOnByDefault />
     <_.fcp.MarkAnimation.true...MarkAnimation />
+    <_.fcp.ObjectModelEncapsulateLegacy.true...ObjectModelEncapsulateLegacy />
+    <_.fcp.ObjectModelTableType.true...ObjectModelTableType />
+    <_.fcp.SchemaViewerObjectModel.true...SchemaViewerObjectModel />
     <SheetIdentifierTracking />
     <WindowsPersistSimpleIdentifiers />
   </document-format-change-manifest>
@@ -17,7 +20,403 @@
       <_.fcp.AnimationOnByDefault.false...format attr='animation-on' value='ao-on' />
     </_.fcp.AnimationOnByDefault.false..._.fcp.MarkAnimation.true...style-rule>
   </_.fcp.AnimationOnByDefault.false...style>
-  <datasources />
+  <datasources>
+    <datasource caption='ratings (Multiple Connections)' inline='true' name='federated.0vuhybs1jy3s2n125jvuc1gcwtfr' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='WGU - Medical_Data (PostgreSQL)' name='postgres.0h3h9gs1rww1lk1bioitp0mvvjha'>
+            <connection authentication='username-password' class='postgres' dbname='medical_data' one-time-sql='' port='5432' server='localhost' username='postgres' />
+          </named-connection>
+          <named-connection caption='Additional - Hospital Ratings 2016-2020 (PostgreSQL)' name='postgres.0zyftyr0fbuin11dr4ezu0xt1z73'>
+            <connection authentication='username-password' class='postgres' dbname='hospital_ratings' one-time-sql='' port='5432' server='localhost' username='postgres' />
+          </named-connection>
+        </named-connections>
+        <_.fcp.ObjectModelEncapsulateLegacy.false...relation connection='postgres.0zyftyr0fbuin11dr4ezu0xt1z73' name='ratings' table='[public].[ratings]' type='table' />
+        <_.fcp.ObjectModelEncapsulateLegacy.true...relation connection='postgres.0zyftyr0fbuin11dr4ezu0xt1z73' name='ratings' table='[public].[ratings]' type='table' />
+        <metadata-records>
+          <metadata-record class='column'>
+            <remote-name>FacilityID</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[FacilityID]</local-name>
+            <parent-name>[ratings]</parent-name>
+            <remote-alias>FacilityID</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>50</width>
+            <contains-null>false</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>FacilityName</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[FacilityName]</local-name>
+            <parent-name>[ratings]</parent-name>
+            <remote-alias>FacilityName</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>500</width>
+            <contains-null>false</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Address</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Address]</local-name>
+            <parent-name>[ratings]</parent-name>
+            <remote-alias>Address</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>250</width>
+            <contains-null>false</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>City</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[City]</local-name>
+            <parent-name>[ratings]</parent-name>
+            <remote-alias>City</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>100</width>
+            <contains-null>false</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>State</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[State]</local-name>
+            <parent-name>[ratings]</parent-name>
+            <remote-alias>State</remote-alias>
+            <ordinal>5</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>2</width>
+            <contains-null>false</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>ZipCode</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[ZipCode]</local-name>
+            <parent-name>[ratings]</parent-name>
+            <remote-alias>ZipCode</remote-alias>
+            <ordinal>6</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>10</width>
+            <contains-null>false</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>CountyName</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[CountyName]</local-name>
+            <parent-name>[ratings]</parent-name>
+            <remote-alias>CountyName</remote-alias>
+            <ordinal>7</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>50</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Phone</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Phone]</local-name>
+            <parent-name>[ratings]</parent-name>
+            <remote-alias>Phone</remote-alias>
+            <ordinal>8</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>15</width>
+            <contains-null>false</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>HospitalType</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[HospitalType]</local-name>
+            <parent-name>[ratings]</parent-name>
+            <remote-alias>HospitalType</remote-alias>
+            <ordinal>9</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>250</width>
+            <contains-null>false</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>HospitalOwnership</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[HospitalOwnership]</local-name>
+            <parent-name>[ratings]</parent-name>
+            <remote-alias>HospitalOwnership</remote-alias>
+            <ordinal>10</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>250</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>EmergencyServices</remote-name>
+            <remote-type>11</remote-type>
+            <local-name>[EmergencyServices]</local-name>
+            <parent-name>[ratings]</parent-name>
+            <remote-alias>EmergencyServices</remote-alias>
+            <ordinal>11</ordinal>
+            <local-type>boolean</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>false</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>MeetsCriteriaForInteropEHRs</remote-name>
+            <remote-type>11</remote-type>
+            <local-name>[MeetsCriteriaForInteropEHRs]</local-name>
+            <parent-name>[ratings]</parent-name>
+            <remote-alias>MeetsCriteriaForInteropEHRs</remote-alias>
+            <ordinal>12</ordinal>
+            <local-type>boolean</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>false</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>HospitalOverallRating</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[HospitalOverallRating]</local-name>
+            <parent-name>[ratings]</parent-name>
+            <remote-alias>HospitalOverallRating</remote-alias>
+            <ordinal>13</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>14</width>
+            <contains-null>false</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>MortalityNationalComparison</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[MortalityNationalComparison]</local-name>
+            <parent-name>[ratings]</parent-name>
+            <remote-alias>MortalityNationalComparison</remote-alias>
+            <ordinal>14</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>30</width>
+            <contains-null>false</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>SafetyOfCareNationalComparison</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[SafetyOfCareNationalComparison]</local-name>
+            <parent-name>[ratings]</parent-name>
+            <remote-alias>SafetyOfCareNationalComparison</remote-alias>
+            <ordinal>15</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>30</width>
+            <contains-null>false</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>ReadmissionNationalComparison</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[ReadmissionNationalComparison]</local-name>
+            <parent-name>[ratings]</parent-name>
+            <remote-alias>ReadmissionNationalComparison</remote-alias>
+            <ordinal>16</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>30</width>
+            <contains-null>false</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>PatientExperienceNationalComparison</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[PatientExperienceNationalComparison]</local-name>
+            <parent-name>[ratings]</parent-name>
+            <remote-alias>PatientExperienceNationalComparison</remote-alias>
+            <ordinal>17</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>30</width>
+            <contains-null>false</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>EffectivenessOfCareNationalComparison</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[EffectivenessOfCareNationalComparison]</local-name>
+            <parent-name>[ratings]</parent-name>
+            <remote-alias>EffectivenessOfCareNationalComparison</remote-alias>
+            <ordinal>18</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>30</width>
+            <contains-null>false</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>TimelinessOfCareNationalComparison</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[TimelinessOfCareNationalComparison]</local-name>
+            <parent-name>[ratings]</parent-name>
+            <remote-alias>TimelinessOfCareNationalComparison</remote-alias>
+            <ordinal>19</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>30</width>
+            <contains-null>false</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>EfficientUseOfMedicalImagingNationalComparison</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[EfficientUseOfMedicalImagingNationalComparison]</local-name>
+            <parent-name>[ratings]</parent-name>
+            <remote-alias>EfficientUseOfMedicalImagingNationalComparison</remote-alias>
+            <ordinal>20</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>30</width>
+            <contains-null>false</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Year</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Year]</local-name>
+            <parent-name>[ratings]</parent-name>
+            <remote-alias>Year</remote-alias>
+            <ordinal>21</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>4</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column datatype='string' name='[City]' role='dimension' semantic-role='[City].[Name]' type='nominal' />
+      <column caption='County Name' datatype='string' name='[CountyName]' role='dimension' semantic-role='[County].[Name]' type='nominal' />
+      <column caption='Effectiveness Of Care National Comparison' datatype='string' name='[EffectivenessOfCareNationalComparison]' role='dimension' type='nominal' />
+      <column caption='Efficient Use Of Medical Imaging National Comparison' datatype='string' name='[EfficientUseOfMedicalImagingNationalComparison]' role='dimension' type='nominal' />
+      <column caption='Emergency Services' datatype='boolean' name='[EmergencyServices]' role='dimension' type='nominal' />
+      <column caption='Facility ID' datatype='string' name='[FacilityID]' role='dimension' type='nominal' />
+      <column caption='Facility Name' datatype='string' name='[FacilityName]' role='dimension' type='nominal' />
+      <column caption='Hospital Overall Rating' datatype='string' name='[HospitalOverallRating]' role='dimension' type='nominal' />
+      <column caption='Hospital Ownership' datatype='string' name='[HospitalOwnership]' role='dimension' type='nominal' />
+      <column caption='Hospital Type' datatype='string' name='[HospitalType]' role='dimension' type='nominal' />
+      <column caption='Meets Criteria For Interop EH Rs' datatype='boolean' name='[MeetsCriteriaForInteropEHRs]' role='dimension' type='nominal' />
+      <column caption='Mortality National Comparison' datatype='string' name='[MortalityNationalComparison]' role='dimension' type='nominal' />
+      <column caption='Patient Experience National Comparison' datatype='string' name='[PatientExperienceNationalComparison]' role='dimension' type='nominal' />
+      <column caption='Readmission National Comparison' datatype='string' name='[ReadmissionNationalComparison]' role='dimension' type='nominal' />
+      <column caption='Safety Of Care National Comparison' datatype='string' name='[SafetyOfCareNationalComparison]' role='dimension' type='nominal' />
+      <column caption='Timeliness Of Care National Comparison' datatype='string' name='[TimelinessOfCareNationalComparison]' role='dimension' type='nominal' />
+      <column caption='Zip Code' datatype='string' name='[ZipCode]' role='dimension' semantic-role='[ZipCode].[Name]' type='nominal' />
+      <_.fcp.ObjectModelTableType.true...column caption='ratings' datatype='table' name='[__tableau_internal_object_id__].[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]' role='measure' type='quantitative' />
+      <layout _.fcp.SchemaViewerObjectModel.false...dim-percentage='0.5' _.fcp.SchemaViewerObjectModel.false...measure-percentage='0.4' dim-ordering='alphabetic' measure-ordering='alphabetic' show-structure='true' />
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;United States&quot;' />
+      </semantic-values>
+      <_.fcp.ObjectModelEncapsulateLegacy.true...object-graph>
+        <objects>
+          <object caption='ratings' id='ratings_AAA3287E043A4CC48B5D33C90B7FDC59'>
+            <properties context=''>
+              <relation connection='postgres.0zyftyr0fbuin11dr4ezu0xt1z73' name='ratings' table='[public].[ratings]' type='table' />
+            </properties>
+          </object>
+        </objects>
+      </_.fcp.ObjectModelEncapsulateLegacy.true...object-graph>
+    </datasource>
+  </datasources>
   <worksheets>
     <worksheet name='Sheet 1'>
       <table>
@@ -37,10 +436,10 @@
         <rows />
         <cols />
       </table>
-      <simple-id uuid='{5CE73C5A-2E37-460A-A9AD-70F9DC3A94C5}' />
+      <simple-id uuid='{7D5F923B-97AB-474D-9528-67292AEF95E7}' />
     </worksheet>
   </worksheets>
-  <windows>
+  <windows source-height='30'>
     <window class='worksheet' maximized='true' name='Sheet 1'>
       <cards>
         <edge name='left'>
@@ -62,7 +461,7 @@
           </strip>
         </edge>
       </cards>
-      <simple-id uuid='{8FAF5B85-7D57-4E24-B80E-45ABD3396A96}' />
+      <simple-id uuid='{C0D374D4-6F26-4665-B83B-9F0A0D30572D}' />
     </window>
   </windows>
   <thumbnails>
