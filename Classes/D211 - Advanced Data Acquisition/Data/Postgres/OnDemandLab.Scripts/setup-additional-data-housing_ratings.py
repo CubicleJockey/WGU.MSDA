@@ -6,12 +6,22 @@ Class: D211 - Advanced Data Acquisition
 
 Script:
     1. Create PostgreSQL database hospital_ratings
-    2. Install pgcsv to perform CSV import into hospital_ratings
+    2. Create database table ratings
+    3. Read CSV data with Pandas, cleanup
+    4. Use psycopg2 to execute SQL to insert data from CSV into ratings table
+
+Example Execution on WGU OnDemand Lab Environment (Windows PowerShell ISE):
+
+
 '''
 import subprocess
 import sys
 from typing import List, Tuple
 from collections import namedtuple
+
+#upgrade the pip installer to make sure this script completely works
+#python.exe -m pip install --upgrade pip
+subprocess.check_call([sys.executable, '-m', 'pip', 'install', '--upgrade', 'pip'])
 
 
 try:
@@ -99,7 +109,7 @@ def extract_csv_to_table(user: str, password: str) -> None:
 
     #remove footnote columns
     remove_footnote_columns = [column_name for column_name in ratings.columns if 'footnote' in column_name]
-    print(remove_footnote_columns)
+    #print(remove_footnote_columns)
     ratings.drop(columns=remove_footnote_columns, inplace=True)
 
     ratings[ehr_column].fillna('N', inplace=True)
