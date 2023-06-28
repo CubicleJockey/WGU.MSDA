@@ -1,0 +1,2 @@
+﻿Set-Location "C:\GitHub\WGU.MSDA\Classes\D211 - Advanced Data Acquisition\Data\Additional\Us Hospital Overall Rating"
+pgcsv --db postgresql://postgres:admin@localhost:5432/hospital_ratings new_table .\Hospital_General_Information_2016_2020.csv
