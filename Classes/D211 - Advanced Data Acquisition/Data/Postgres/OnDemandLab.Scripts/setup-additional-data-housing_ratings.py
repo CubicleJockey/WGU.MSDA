@@ -170,22 +170,19 @@ def extract_csv_to_table(user: str, password: str) -> None:
     cur.execute(create_table_statement)
     #conn.commit()
 
-
+    insert_columns = ', '.join([f'"{column}"' for column in adjusted_columns])
     for _, row in ratings.iterrows():
         insert_statement = f'''
-        INSERT INTO ratings({', '.join(adjusted_columns)})
-        VALUES('{row['FacilityID']}', '{row['FacilityName']}', '{row['Address']}', '{row['City']}', '{row['State']}',
-               '{row['ZipCode']}', '{row['CountyName']}', '{row['Phone']}', '{row['HospitalType']}', '{row['HospitalOwnership']}',
-                {row['EmergencyServices']}, {row['MeetsCriteriaForInteropEHRs']}, '{row['HospitalOverallRating']}', '{row['MortalityNationalComparison']}',
-               '{row['SafetyOfCareNationalComparison']}', '{row['ReadmissionNationalComparison']}', '{row['PatientExperienceNationalComparison']}',
-               '{row['EffectivenessOfCareNationalComparison']}', '{row['TimelinessOfCareNationalComparison']}', '{row['EfficientUseOfMedicalImagingNationalComparison']}',
-               '{row['Year']}'
-        );
+        INSERT INTO ratings({insert_columns})
+        VALUES(%s, %s, %s, %s,  %s,  %s,  %s,  %s,  %s,  %s,  %s,  %s,  %s,  %s,  %s,  %s,  %s,  %s,  %s,  %s,  %s);
         '''
-
-        print(insert_statement)
-
-        cur.execute(insert_statement)
+        cur.execute(insert_statement,
+                    (row['FacilityID'], row['FacilityName'], row['Address'], row['City'], row['State'],
+                     row['ZipCode'], row['CountyName'], row['Phone'], row['HospitalType'], row['HospitalOwnership'],
+                     row['EmergencyServices'], row['MeetsCriteriaForInteropEHRs'], row['HospitalOverallRating'],
+                     row['MortalityNationalComparison'], row['SafetyOfCareNationalComparison'], row['ReadmissionNationalComparison'],
+                     row['PatientExperienceNationalComparison'], row['EffectivenessOfCareNationalComparison'], row['TimelinessOfCareNationalComparison'],
+                     row['EfficientUseOfMedicalImagingNationalComparison'], row['Year']))
 
 
     cur.close()
