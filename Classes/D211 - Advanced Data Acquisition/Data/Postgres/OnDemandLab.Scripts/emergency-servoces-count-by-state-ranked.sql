@@ -17,7 +17,8 @@ WITH Emergency_Counts_By_State AS (
 
 SELECT ecbs.State
       ,ecbs.EmergencyServiceCount
-	  ,DENSE_RANK() OVER(ORDER BY ecbs.EmergencyServiceCount DESC)
-FROM Emergency_Counts_By_State AS ecbs;
+	  ,DENSE_RANK() OVER(ORDER BY ecbs.EmergencyServiceCount DESC) AS Rank
+FROM Emergency_Counts_By_State AS ecbs
+ORDER BY ecbs.State, Rank
 
 
