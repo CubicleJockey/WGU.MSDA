@@ -2107,6 +2107,26 @@ ORDER BY ecbs.State, Rank</relation>
       </table>
       <simple-id uuid='{E82D3CEB-A7C1-44F7-8939-D7215FF6EB40}' />
     </worksheet>
+    <worksheet name='Hospital Overall Ratings Ranked Per State'>
+      <table>
+        <view>
+          <datasources />
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+          </pane>
+        </panes>
+        <rows />
+        <cols />
+      </table>
+      <simple-id uuid='{35C113DC-4AC2-4A92-B82D-22048E1AFA43}' />
+    </worksheet>
     <worksheet name='Patient Count and Rank By State'>
       <table>
         <view>
@@ -2230,7 +2250,7 @@ ORDER BY ecbs.State, Rank</relation>
       </viewpoint>
       <simple-id uuid='{C0D374D4-6F26-4665-B83B-9F0A0D30572D}' />
     </window>
-    <window class='worksheet' maximized='true' name='Emergency Services By State and Rank'>
+    <window class='worksheet' name='Emergency Services By State and Rank'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -2265,6 +2285,29 @@ ORDER BY ecbs.State, Rank</relation>
         <default-map-tool-selection tool='1' />
       </viewpoint>
       <simple-id uuid='{B937D053-817E-4968-BA1B-2BC52A3284BD}' />
+    </window>
+    <window class='worksheet' maximized='true' name='Hospital Overall Ratings Ranked Per State'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{A44BE0D9-B724-483B-ACEB-0B3044C3A928}' />
     </window>
   </windows>
   <thumbnails>
@@ -2518,6 +2561,20 @@ ORDER BY ecbs.State, Rank</relation>
       pwjDbTzy9AvY6LRw4tGngXgIFAewtTXBLJ6Xwzjz7k/w+ptnAWuGFA6Cm5/i9vYErFO9tabB
       wwXLsrC+vo40TRGGIYIg2J9KcJIkC7Hcu4XneUYHMFgARZPuSwZYprJXEyybKG3wcGDfhkLs
       ts6LgcEysCwLji6rxsDgYcD/B1QOn2fr3tNgAAAAAElFTkSuQmCC
+    </thumbnail>
+    <thumbnail height='192' name='Hospital Overall Ratings Ranked Per State' width='192'>
+      iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAACXBIWXMAAA7DAAAOwwHHb6hk
+      AAACFUlEQVR4nO3TMQEAIAzAMMC/5yFjRxMFfXpnZg5Eve0A2GQA0gxAmgFIMwBpBiDNAKQZ
+      gDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFI
+      MwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQD
+      kGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBp
+      BiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA
+      0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDN
+      AKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxA
+      mgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZ
+      gDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFI
+      MwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKR9Y+0F
+      fBUOM1sAAAAASUVORK5CYII=
     </thumbnail>
     <thumbnail height='192' name='Patient Count and Rank By State' width='192'>
       iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAACXBIWXMAAA7DAAAOwwHHb6hk
