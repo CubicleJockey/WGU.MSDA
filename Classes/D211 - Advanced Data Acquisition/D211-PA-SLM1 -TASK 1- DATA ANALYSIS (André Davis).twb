@@ -7,6 +7,7 @@
     <MapboxVectorStylesAndLayers />
     <_.fcp.MarkAnimation.true...MarkAnimation />
     <_.fcp.ObjectModelEncapsulateLegacy.true...ObjectModelEncapsulateLegacy />
+    <_.fcp.ObjectModelExtractV2.true...ObjectModelExtractV2 />
     <_.fcp.ObjectModelTableType.true...ObjectModelTableType />
     <_.fcp.SchemaViewerObjectModel.true...SchemaViewerObjectModel />
     <SheetIdentifierTracking />
@@ -22,7 +23,7 @@
     </_.fcp.AnimationOnByDefault.false..._.fcp.MarkAnimation.true...style-rule>
   </_.fcp.AnimationOnByDefault.false...style>
   <datasources>
-    <datasource caption='Medical' inline='true' name='federated.0vuhybs1jy3s2n125jvuc1gcwtfr' version='18.1'>
+    <datasource caption=' Medical Data And Ratings' inline='true' name='federated.0vuhybs1jy3s2n125jvuc1gcwtfr' version='18.1'>
       <connection class='federated'>
         <named-connections>
           <named-connection caption='WGU - Medical_Data (PostgreSQL)' name='postgres.0h3h9gs1rww1lk1bioitp0mvvjha'>
@@ -64,6 +65,21 @@ pcbs.state&#13;
    ,DENSE_RANK() OVER (ORDER BY pcbs.PatientCount DESC) AS Ranking&#13;
 FROM Patient_Count_By_States AS pcbs&#13;
 ORDER BY state ASC, Ranking DESC</relation>
+          <relation connection='postgres.0zyftyr0fbuin11dr4ezu0xt1z73' name='Custom SQL Query3' type='text'>WITH State_OverallRanking_By_State_And_Rating AS (&#13;
+SELECT rating.&quot;State&quot; AS State&#13;
+  ,rating.&quot;HospitalOverallRating&quot; AS HospitalOverallRating&#13;
+  ,COUNT(rating.&quot;HospitalOverallRating&quot;) AS HospitalOverallRatingCount&#13;
+FROM public.ratings AS rating&#13;
+GROUP BY  rating.&quot;State&quot;, rating.&quot;HospitalOverallRating&quot;&#13;
+ORDER BY rating.&quot;State&quot;&#13;
+)&#13;
+&#13;
+SELECT &#13;
+ sobsar.State&#13;
+,sobsar.HospitalOverallRating&#13;
+,RANK() OVER (PARTITION BY sobsar.State ORDER BY sobsar.HospitalOverallRatingCount) AS Ranking&#13;
+FROM State_OverallRanking_By_State_And_Rating AS sobsar&#13;
+ORDER BY sobsar.State ASC, Ranking DESC</relation>
           <relation connection='postgres.0h3h9gs1rww1lk1bioitp0mvvjha' name='Custom SQL Query1' type='text'>SELECT p.children&#13;
   ,p.age&#13;
   ,p.income&#13;
@@ -141,6 +157,7 @@ ORDER BY ecbs.State, Rank</relation>
           <map key='[emergencyservicecount]' value='[Custom SQL Query].[emergencyservicecount]' />
           <map key='[full_meals]' value='[Custom SQL Query1].[full_meals]' />
           <map key='[gender]' value='[Custom SQL Query1].[gender]' />
+          <map key='[hospitaloverallrating]' value='[Custom SQL Query3].[hospitaloverallrating]' />
           <map key='[income]' value='[Custom SQL Query1].[income]' />
           <map key='[initial_admission]' value='[Custom SQL Query1].[initial_admission]' />
           <map key='[initial_days]' value='[Custom SQL Query1].[initial_days]' />
@@ -148,9 +165,11 @@ ORDER BY ecbs.State, Rank</relation>
           <map key='[patientcount (Custom SQL Query2)]' value='[Custom SQL Query2].[patientcount]' />
           <map key='[rank]' value='[Custom SQL Query].[rank]' />
           <map key='[ranking (Custom SQL Query2)]' value='[Custom SQL Query2].[ranking]' />
+          <map key='[ranking]' value='[Custom SQL Query3].[ranking]' />
           <map key='[soft_drink]' value='[Custom SQL Query1].[soft_drink]' />
           <map key='[state (Custom SQL Query1)]' value='[Custom SQL Query1].[state]' />
           <map key='[state (Custom SQL Query2)]' value='[Custom SQL Query2].[state]' />
+          <map key='[state (Custom SQL Query3)]' value='[Custom SQL Query3].[state]' />
           <map key='[state]' value='[Custom SQL Query].[state]' />
           <map key='[stroke]' value='[Custom SQL Query1].[stroke]' />
           <map key='[totalcharge]' value='[Custom SQL Query1].[totalcharge]' />
@@ -550,12 +569,59 @@ ORDER BY ecbs.State, Rank</relation>
             <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_2744E27039A6433496B4F4C53EAE2A06]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
           </metadata-record>
           <metadata-record class='column'>
+            <remote-name>state</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[state (Custom SQL Query3)]</local-name>
+            <parent-name>[Custom SQL Query3]</parent-name>
+            <remote-alias>state</remote-alias>
+            <ordinal>27</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>2</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_5E7D8B623C9547D4AAAF0039605D179B]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>hospitaloverallrating</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[hospitaloverallrating]</local-name>
+            <parent-name>[Custom SQL Query3]</parent-name>
+            <remote-alias>hospitaloverallrating</remote-alias>
+            <ordinal>28</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>14</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_5E7D8B623C9547D4AAAF0039605D179B]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>ranking</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[ranking]</local-name>
+            <parent-name>[Custom SQL Query3]</parent-name>
+            <remote-alias>ranking</remote-alias>
+            <ordinal>29</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>19</precision>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_5E7D8B623C9547D4AAAF0039605D179B]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
             <remote-name>children</remote-name>
             <remote-type>3</remote-type>
             <local-name>[children]</local-name>
             <parent-name>[Custom SQL Query1]</parent-name>
             <remote-alias>children</remote-alias>
-            <ordinal>27</ordinal>
+            <ordinal>31</ordinal>
             <local-type>integer</local-type>
             <aggregation>Sum</aggregation>
             <precision>10</precision>
@@ -568,7 +634,7 @@ ORDER BY ecbs.State, Rank</relation>
             <local-name>[age]</local-name>
             <parent-name>[Custom SQL Query1]</parent-name>
             <remote-alias>age</remote-alias>
-            <ordinal>28</ordinal>
+            <ordinal>32</ordinal>
             <local-type>integer</local-type>
             <aggregation>Sum</aggregation>
             <precision>10</precision>
@@ -581,7 +647,7 @@ ORDER BY ecbs.State, Rank</relation>
             <local-name>[income]</local-name>
             <parent-name>[Custom SQL Query1]</parent-name>
             <remote-alias>income</remote-alias>
-            <ordinal>29</ordinal>
+            <ordinal>33</ordinal>
             <local-type>real</local-type>
             <aggregation>Sum</aggregation>
             <scale>0</scale>
@@ -594,7 +660,7 @@ ORDER BY ecbs.State, Rank</relation>
             <local-name>[marital]</local-name>
             <parent-name>[Custom SQL Query1]</parent-name>
             <remote-alias>marital</remote-alias>
-            <ordinal>30</ordinal>
+            <ordinal>34</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <width>2147483647</width>
@@ -612,7 +678,7 @@ ORDER BY ecbs.State, Rank</relation>
             <local-name>[Readmission]</local-name>
             <parent-name>[Custom SQL Query1]</parent-name>
             <remote-alias>Readmission</remote-alias>
-            <ordinal>31</ordinal>
+            <ordinal>35</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <width>2147483647</width>
@@ -630,7 +696,7 @@ ORDER BY ecbs.State, Rank</relation>
             <local-name>[gender]</local-name>
             <parent-name>[Custom SQL Query1]</parent-name>
             <remote-alias>gender</remote-alias>
-            <ordinal>32</ordinal>
+            <ordinal>36</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <width>2147483647</width>
@@ -648,7 +714,7 @@ ORDER BY ecbs.State, Rank</relation>
             <local-name>[initial_days]</local-name>
             <parent-name>[Custom SQL Query1]</parent-name>
             <remote-alias>initial_days</remote-alias>
-            <ordinal>33</ordinal>
+            <ordinal>37</ordinal>
             <local-type>real</local-type>
             <aggregation>Sum</aggregation>
             <scale>0</scale>
@@ -661,7 +727,7 @@ ORDER BY ecbs.State, Rank</relation>
             <local-name>[totalcharge]</local-name>
             <parent-name>[Custom SQL Query1]</parent-name>
             <remote-alias>totalcharge</remote-alias>
-            <ordinal>34</ordinal>
+            <ordinal>38</ordinal>
             <local-type>real</local-type>
             <aggregation>Sum</aggregation>
             <scale>0</scale>
@@ -674,7 +740,7 @@ ORDER BY ecbs.State, Rank</relation>
             <local-name>[additional_charges]</local-name>
             <parent-name>[Custom SQL Query1]</parent-name>
             <remote-alias>additional_charges</remote-alias>
-            <ordinal>35</ordinal>
+            <ordinal>39</ordinal>
             <local-type>real</local-type>
             <aggregation>Sum</aggregation>
             <scale>0</scale>
@@ -687,7 +753,7 @@ ORDER BY ecbs.State, Rank</relation>
             <local-name>[vitd_levels]</local-name>
             <parent-name>[Custom SQL Query1]</parent-name>
             <remote-alias>vitd_levels</remote-alias>
-            <ordinal>36</ordinal>
+            <ordinal>40</ordinal>
             <local-type>real</local-type>
             <aggregation>Sum</aggregation>
             <scale>0</scale>
@@ -700,7 +766,7 @@ ORDER BY ecbs.State, Rank</relation>
             <local-name>[doc_visits]</local-name>
             <parent-name>[Custom SQL Query1]</parent-name>
             <remote-alias>doc_visits</remote-alias>
-            <ordinal>37</ordinal>
+            <ordinal>41</ordinal>
             <local-type>integer</local-type>
             <aggregation>Sum</aggregation>
             <precision>10</precision>
@@ -713,7 +779,7 @@ ORDER BY ecbs.State, Rank</relation>
             <local-name>[full_meals]</local-name>
             <parent-name>[Custom SQL Query1]</parent-name>
             <remote-alias>full_meals</remote-alias>
-            <ordinal>38</ordinal>
+            <ordinal>42</ordinal>
             <local-type>integer</local-type>
             <aggregation>Sum</aggregation>
             <precision>10</precision>
@@ -726,7 +792,7 @@ ORDER BY ecbs.State, Rank</relation>
             <local-name>[vitd_supp]</local-name>
             <parent-name>[Custom SQL Query1]</parent-name>
             <remote-alias>vitd_supp</remote-alias>
-            <ordinal>39</ordinal>
+            <ordinal>43</ordinal>
             <local-type>integer</local-type>
             <aggregation>Sum</aggregation>
             <precision>10</precision>
@@ -739,7 +805,7 @@ ORDER BY ecbs.State, Rank</relation>
             <local-name>[soft_drink]</local-name>
             <parent-name>[Custom SQL Query1]</parent-name>
             <remote-alias>soft_drink</remote-alias>
-            <ordinal>40</ordinal>
+            <ordinal>44</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <width>2147483647</width>
@@ -757,7 +823,7 @@ ORDER BY ecbs.State, Rank</relation>
             <local-name>[HighBlood]</local-name>
             <parent-name>[Custom SQL Query1]</parent-name>
             <remote-alias>HighBlood</remote-alias>
-            <ordinal>41</ordinal>
+            <ordinal>45</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <width>2147483647</width>
@@ -775,7 +841,7 @@ ORDER BY ecbs.State, Rank</relation>
             <local-name>[stroke]</local-name>
             <parent-name>[Custom SQL Query1]</parent-name>
             <remote-alias>stroke</remote-alias>
-            <ordinal>42</ordinal>
+            <ordinal>46</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <width>2147483647</width>
@@ -793,7 +859,7 @@ ORDER BY ecbs.State, Rank</relation>
             <local-name>[Zip]</local-name>
             <parent-name>[Custom SQL Query1]</parent-name>
             <remote-alias>Zip</remote-alias>
-            <ordinal>43</ordinal>
+            <ordinal>47</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <width>2147483647</width>
@@ -811,7 +877,7 @@ ORDER BY ecbs.State, Rank</relation>
             <local-name>[city]</local-name>
             <parent-name>[Custom SQL Query1]</parent-name>
             <remote-alias>city</remote-alias>
-            <ordinal>44</ordinal>
+            <ordinal>48</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <width>2147483647</width>
@@ -829,7 +895,7 @@ ORDER BY ecbs.State, Rank</relation>
             <local-name>[state (Custom SQL Query1)]</local-name>
             <parent-name>[Custom SQL Query1]</parent-name>
             <remote-alias>state</remote-alias>
-            <ordinal>45</ordinal>
+            <ordinal>49</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <width>2147483647</width>
@@ -847,7 +913,7 @@ ORDER BY ecbs.State, Rank</relation>
             <local-name>[county]</local-name>
             <parent-name>[Custom SQL Query1]</parent-name>
             <remote-alias>county</remote-alias>
-            <ordinal>46</ordinal>
+            <ordinal>50</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <width>2147483647</width>
@@ -865,7 +931,7 @@ ORDER BY ecbs.State, Rank</relation>
             <local-name>[complication_risk]</local-name>
             <parent-name>[Custom SQL Query1]</parent-name>
             <remote-alias>complication_risk</remote-alias>
-            <ordinal>47</ordinal>
+            <ordinal>51</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <width>2147483647</width>
@@ -883,7 +949,7 @@ ORDER BY ecbs.State, Rank</relation>
             <local-name>[initial_admission]</local-name>
             <parent-name>[Custom SQL Query1]</parent-name>
             <remote-alias>initial_admission</remote-alias>
-            <ordinal>48</ordinal>
+            <ordinal>52</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <width>2147483647</width>
@@ -901,7 +967,7 @@ ORDER BY ecbs.State, Rank</relation>
             <local-name>[state]</local-name>
             <parent-name>[Custom SQL Query]</parent-name>
             <remote-alias>state</remote-alias>
-            <ordinal>50</ordinal>
+            <ordinal>54</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <width>2</width>
@@ -918,7 +984,7 @@ ORDER BY ecbs.State, Rank</relation>
             <local-name>[emergencyservicecount]</local-name>
             <parent-name>[Custom SQL Query]</parent-name>
             <remote-alias>emergencyservicecount</remote-alias>
-            <ordinal>51</ordinal>
+            <ordinal>55</ordinal>
             <local-type>integer</local-type>
             <aggregation>Sum</aggregation>
             <precision>19</precision>
@@ -931,7 +997,7 @@ ORDER BY ecbs.State, Rank</relation>
             <local-name>[rank]</local-name>
             <parent-name>[Custom SQL Query]</parent-name>
             <remote-alias>rank</remote-alias>
-            <ordinal>52</ordinal>
+            <ordinal>56</ordinal>
             <local-type>integer</local-type>
             <aggregation>Sum</aggregation>
             <precision>19</precision>
@@ -956,10 +1022,12 @@ ORDER BY ecbs.State, Rank</relation>
       <column caption='Patient Experience National Comparison' datatype='string' name='[PatientExperienceNationalComparison]' role='dimension' type='nominal' />
       <column caption='Readmission National Comparison' datatype='string' name='[ReadmissionNationalComparison]' role='dimension' type='nominal' />
       <column caption='Safety Of Care National Comparison' datatype='string' name='[SafetyOfCareNationalComparison]' role='dimension' type='nominal' />
+      <column datatype='string' name='[State]' role='dimension' semantic-role='[State].[Name]' type='nominal' />
       <column caption='Timeliness Of Care National Comparison' datatype='string' name='[TimelinessOfCareNationalComparison]' role='dimension' type='nominal' />
       <column caption='Zip Code' datatype='string' name='[ZipCode]' role='dimension' semantic-role='[ZipCode].[Name]' type='nominal' />
       <column datatype='string' name='[Zip]' role='dimension' semantic-role='[ZipCode].[Name]' type='nominal' />
       <_.fcp.ObjectModelTableType.true...column caption='Patient Count By State Ranked' datatype='table' name='[__tableau_internal_object_id__].[_2744E27039A6433496B4F4C53EAE2A06]' role='measure' type='quantitative' />
+      <_.fcp.ObjectModelTableType.true...column caption='Hospital Overall Ranking Ranked Per State' datatype='table' name='[__tableau_internal_object_id__].[_5E7D8B623C9547D4AAAF0039605D179B]' role='measure' type='quantitative' />
       <_.fcp.ObjectModelTableType.true...column caption='Medical Data Complete Dataset' datatype='table' name='[__tableau_internal_object_id__].[_B4D561C7D27C41E2899CF70F160083B0]' role='measure' type='quantitative' />
       <_.fcp.ObjectModelTableType.true...column caption='Emergency Services Count By State and Rank' datatype='table' name='[__tableau_internal_object_id__].[_EC981D23D983468F82A457906EBE31B5]' role='measure' type='quantitative' />
       <_.fcp.ObjectModelTableType.true...column caption='ratings' datatype='table' name='[__tableau_internal_object_id__].[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]' role='measure' type='quantitative' />
@@ -969,7 +1037,842 @@ ORDER BY ecbs.State, Rank</relation>
       <column caption='Rank' datatype='integer' name='[ranking (Custom SQL Query2)]' role='measure' type='quantitative' />
       <column datatype='string' name='[state (Custom SQL Query1)]' role='dimension' semantic-role='[State].[Name]' type='nominal' />
       <column caption='PatientState' datatype='string' name='[state (Custom SQL Query2)]' role='dimension' semantic-role='[State].[Name]' type='nominal' />
+      <column datatype='string' name='[state (Custom SQL Query3)]' role='dimension' semantic-role='[State].[Name]' type='nominal' />
       <column datatype='string' name='[state]' role='dimension' semantic-role='[State].[Name]' type='nominal' />
+      <extract _.fcp.ObjectModelExtractV2.true...object-id='' count='-1' enabled='true' units='records'>
+        <connection access_mode='readonly' authentication='auth-none' author-locale='en_US' class='hyper' dbname='C:/Users/LabUser/Downloads/D211-20230701T013441Z-001/D211/Medical Data And Ratings.hyper' default-settings='yes' schema='Extract' sslmode='' tablename='Extract' update-time='07/01/2023 06:23:34 PM' username='tableau_internal_user'>
+          <_.fcp.ObjectModelEncapsulateLegacy.false...relation name='_2744E27039A6433496B4F4C53EAE2A06' table='[Extract].[_2744E27039A6433496B4F4C53EAE2A06]' type='table' />
+          <_.fcp.ObjectModelEncapsulateLegacy.true...relation type='collection'>
+            <relation name='ratings_AAA3287E043A4CC48B5D33C90B7FDC59' table='[Extract].[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]' type='table' />
+            <relation name='_2744E27039A6433496B4F4C53EAE2A06' table='[Extract].[_2744E27039A6433496B4F4C53EAE2A06]' type='table' />
+            <relation name='_5E7D8B623C9547D4AAAF0039605D179B' table='[Extract].[_5E7D8B623C9547D4AAAF0039605D179B]' type='table' />
+            <relation name='_B4D561C7D27C41E2899CF70F160083B0' table='[Extract].[_B4D561C7D27C41E2899CF70F160083B0]' type='table' />
+            <relation name='_EC981D23D983468F82A457906EBE31B5' table='[Extract].[_EC981D23D983468F82A457906EBE31B5]' type='table' />
+          </_.fcp.ObjectModelEncapsulateLegacy.true...relation>
+          <cols>
+            <map key='[Address]' value='[ratings_AAA3287E043A4CC48B5D33C90B7FDC59].[Address]' />
+            <map key='[City]' value='[ratings_AAA3287E043A4CC48B5D33C90B7FDC59].[City]' />
+            <map key='[CountyName]' value='[ratings_AAA3287E043A4CC48B5D33C90B7FDC59].[CountyName]' />
+            <map key='[EffectivenessOfCareNationalComparison]' value='[ratings_AAA3287E043A4CC48B5D33C90B7FDC59].[EffectivenessOfCareNationalComparison]' />
+            <map key='[EfficientUseOfMedicalImagingNationalComparison]' value='[ratings_AAA3287E043A4CC48B5D33C90B7FDC59].[EfficientUseOfMedicalImagingNationalComparison]' />
+            <map key='[EmergencyServices]' value='[ratings_AAA3287E043A4CC48B5D33C90B7FDC59].[EmergencyServices]' />
+            <map key='[FacilityID]' value='[ratings_AAA3287E043A4CC48B5D33C90B7FDC59].[FacilityID]' />
+            <map key='[FacilityName]' value='[ratings_AAA3287E043A4CC48B5D33C90B7FDC59].[FacilityName]' />
+            <map key='[HighBlood]' value='[_B4D561C7D27C41E2899CF70F160083B0].[HighBlood]' />
+            <map key='[HospitalOverallRating]' value='[ratings_AAA3287E043A4CC48B5D33C90B7FDC59].[HospitalOverallRating]' />
+            <map key='[HospitalOwnership]' value='[ratings_AAA3287E043A4CC48B5D33C90B7FDC59].[HospitalOwnership]' />
+            <map key='[HospitalType]' value='[ratings_AAA3287E043A4CC48B5D33C90B7FDC59].[HospitalType]' />
+            <map key='[MeetsCriteriaForInteropEHRs]' value='[ratings_AAA3287E043A4CC48B5D33C90B7FDC59].[MeetsCriteriaForInteropEHRs]' />
+            <map key='[MortalityNationalComparison]' value='[ratings_AAA3287E043A4CC48B5D33C90B7FDC59].[MortalityNationalComparison]' />
+            <map key='[PatientExperienceNationalComparison]' value='[ratings_AAA3287E043A4CC48B5D33C90B7FDC59].[PatientExperienceNationalComparison]' />
+            <map key='[Phone]' value='[ratings_AAA3287E043A4CC48B5D33C90B7FDC59].[Phone]' />
+            <map key='[ReadmissionNationalComparison]' value='[ratings_AAA3287E043A4CC48B5D33C90B7FDC59].[ReadmissionNationalComparison]' />
+            <map key='[Readmission]' value='[_B4D561C7D27C41E2899CF70F160083B0].[Readmission]' />
+            <map key='[SafetyOfCareNationalComparison]' value='[ratings_AAA3287E043A4CC48B5D33C90B7FDC59].[SafetyOfCareNationalComparison]' />
+            <map key='[State]' value='[ratings_AAA3287E043A4CC48B5D33C90B7FDC59].[State]' />
+            <map key='[TimelinessOfCareNationalComparison]' value='[ratings_AAA3287E043A4CC48B5D33C90B7FDC59].[TimelinessOfCareNationalComparison]' />
+            <map key='[Year]' value='[ratings_AAA3287E043A4CC48B5D33C90B7FDC59].[Year]' />
+            <map key='[ZipCode]' value='[ratings_AAA3287E043A4CC48B5D33C90B7FDC59].[ZipCode]' />
+            <map key='[Zip]' value='[_B4D561C7D27C41E2899CF70F160083B0].[Zip]' />
+            <map key='[additional_charges]' value='[_B4D561C7D27C41E2899CF70F160083B0].[additional_charges]' />
+            <map key='[age]' value='[_B4D561C7D27C41E2899CF70F160083B0].[age]' />
+            <map key='[children]' value='[_B4D561C7D27C41E2899CF70F160083B0].[children]' />
+            <map key='[city]' value='[_B4D561C7D27C41E2899CF70F160083B0].[city]' />
+            <map key='[complication_risk]' value='[_B4D561C7D27C41E2899CF70F160083B0].[complication_risk]' />
+            <map key='[county]' value='[_B4D561C7D27C41E2899CF70F160083B0].[county]' />
+            <map key='[doc_visits]' value='[_B4D561C7D27C41E2899CF70F160083B0].[doc_visits]' />
+            <map key='[emergencyservicecount]' value='[_EC981D23D983468F82A457906EBE31B5].[emergencyservicecount]' />
+            <map key='[full_meals]' value='[_B4D561C7D27C41E2899CF70F160083B0].[full_meals]' />
+            <map key='[gender]' value='[_B4D561C7D27C41E2899CF70F160083B0].[gender]' />
+            <map key='[hospitaloverallrating]' value='[_5E7D8B623C9547D4AAAF0039605D179B].[hospitaloverallrating]' />
+            <map key='[income]' value='[_B4D561C7D27C41E2899CF70F160083B0].[income]' />
+            <map key='[initial_admission]' value='[_B4D561C7D27C41E2899CF70F160083B0].[initial_admission]' />
+            <map key='[initial_days]' value='[_B4D561C7D27C41E2899CF70F160083B0].[initial_days]' />
+            <map key='[marital]' value='[_B4D561C7D27C41E2899CF70F160083B0].[marital]' />
+            <map key='[patientcount (Custom SQL Query2)]' value='[_2744E27039A6433496B4F4C53EAE2A06].[patientcount]' />
+            <map key='[rank]' value='[_EC981D23D983468F82A457906EBE31B5].[rank]' />
+            <map key='[ranking (Custom SQL Query2)]' value='[_2744E27039A6433496B4F4C53EAE2A06].[ranking]' />
+            <map key='[ranking]' value='[_5E7D8B623C9547D4AAAF0039605D179B].[ranking]' />
+            <map key='[soft_drink]' value='[_B4D561C7D27C41E2899CF70F160083B0].[soft_drink]' />
+            <map key='[state (Custom SQL Query1)]' value='[_B4D561C7D27C41E2899CF70F160083B0].[state]' />
+            <map key='[state (Custom SQL Query2)]' value='[_2744E27039A6433496B4F4C53EAE2A06].[state]' />
+            <map key='[state (Custom SQL Query3)]' value='[_5E7D8B623C9547D4AAAF0039605D179B].[state]' />
+            <map key='[state]' value='[_EC981D23D983468F82A457906EBE31B5].[state]' />
+            <map key='[stroke]' value='[_B4D561C7D27C41E2899CF70F160083B0].[stroke]' />
+            <map key='[totalcharge]' value='[_B4D561C7D27C41E2899CF70F160083B0].[totalcharge]' />
+            <map key='[vitd_levels]' value='[_B4D561C7D27C41E2899CF70F160083B0].[vitd_levels]' />
+            <map key='[vitd_supp]' value='[_B4D561C7D27C41E2899CF70F160083B0].[vitd_supp]' />
+          </cols>
+          <refresh>
+            <refresh-event add-from-file-path=' Medical Data And Ratings' increment-value='%null%' refresh-type='create' rows-inserted='35539' timestamp-start='2023-07-01 18:23:31.270' />
+          </refresh>
+          <metadata-records>
+            <metadata-record class='column'>
+              <remote-name>FacilityID</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[FacilityID]</local-name>
+              <parent-name>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</parent-name>
+              <remote-alias>FacilityID</remote-alias>
+              <ordinal>0</ordinal>
+              <family>ratings</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>6900</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>FacilityName</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[FacilityName]</local-name>
+              <parent-name>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</parent-name>
+              <remote-alias>FacilityName</remote-alias>
+              <ordinal>1</ordinal>
+              <family>ratings</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>6685</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Address</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[Address]</local-name>
+              <parent-name>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</parent-name>
+              <remote-alias>Address</remote-alias>
+              <ordinal>2</ordinal>
+              <family>ratings</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>6732</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>City</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[City]</local-name>
+              <parent-name>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</parent-name>
+              <remote-alias>City</remote-alias>
+              <ordinal>3</ordinal>
+              <family>ratings</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>3666</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>State</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[State]</local-name>
+              <parent-name>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</parent-name>
+              <remote-alias>State</remote-alias>
+              <ordinal>4</ordinal>
+              <family>ratings</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>59</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>ZipCode</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[ZipCode]</local-name>
+              <parent-name>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</parent-name>
+              <remote-alias>ZipCode</remote-alias>
+              <ordinal>5</ordinal>
+              <family>ratings</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>5887</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>CountyName</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[CountyName]</local-name>
+              <parent-name>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</parent-name>
+              <remote-alias>CountyName</remote-alias>
+              <ordinal>6</ordinal>
+              <family>ratings</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>1944</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Phone</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[Phone]</local-name>
+              <parent-name>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</parent-name>
+              <remote-alias>Phone</remote-alias>
+              <ordinal>7</ordinal>
+              <family>ratings</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>9044</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>HospitalType</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[HospitalType]</local-name>
+              <parent-name>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</parent-name>
+              <remote-alias>HospitalType</remote-alias>
+              <ordinal>8</ordinal>
+              <family>ratings</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>7</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>HospitalOwnership</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[HospitalOwnership]</local-name>
+              <parent-name>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</parent-name>
+              <remote-alias>HospitalOwnership</remote-alias>
+              <ordinal>9</ordinal>
+              <family>ratings</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>14</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>EmergencyServices</remote-name>
+              <remote-type>11</remote-type>
+              <local-name>[EmergencyServices]</local-name>
+              <parent-name>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</parent-name>
+              <remote-alias>EmergencyServices</remote-alias>
+              <ordinal>10</ordinal>
+              <family>ratings</family>
+              <local-type>boolean</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>2</approx-count>
+              <contains-null>true</contains-null>
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>MeetsCriteriaForInteropEHRs</remote-name>
+              <remote-type>11</remote-type>
+              <local-name>[MeetsCriteriaForInteropEHRs]</local-name>
+              <parent-name>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</parent-name>
+              <remote-alias>MeetsCriteriaForInteropEHRs</remote-alias>
+              <ordinal>11</ordinal>
+              <family>ratings</family>
+              <local-type>boolean</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>2</approx-count>
+              <contains-null>true</contains-null>
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>HospitalOverallRating</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[HospitalOverallRating]</local-name>
+              <parent-name>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</parent-name>
+              <remote-alias>HospitalOverallRating</remote-alias>
+              <ordinal>12</ordinal>
+              <family>ratings</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>6</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>MortalityNationalComparison</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[MortalityNationalComparison]</local-name>
+              <parent-name>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</parent-name>
+              <remote-alias>MortalityNationalComparison</remote-alias>
+              <ordinal>13</ordinal>
+              <family>ratings</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>7</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>SafetyOfCareNationalComparison</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[SafetyOfCareNationalComparison]</local-name>
+              <parent-name>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</parent-name>
+              <remote-alias>SafetyOfCareNationalComparison</remote-alias>
+              <ordinal>14</ordinal>
+              <family>ratings</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>7</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>ReadmissionNationalComparison</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[ReadmissionNationalComparison]</local-name>
+              <parent-name>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</parent-name>
+              <remote-alias>ReadmissionNationalComparison</remote-alias>
+              <ordinal>15</ordinal>
+              <family>ratings</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>7</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>PatientExperienceNationalComparison</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[PatientExperienceNationalComparison]</local-name>
+              <parent-name>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</parent-name>
+              <remote-alias>PatientExperienceNationalComparison</remote-alias>
+              <ordinal>16</ordinal>
+              <family>ratings</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>7</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>EffectivenessOfCareNationalComparison</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[EffectivenessOfCareNationalComparison]</local-name>
+              <parent-name>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</parent-name>
+              <remote-alias>EffectivenessOfCareNationalComparison</remote-alias>
+              <ordinal>17</ordinal>
+              <family>ratings</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>7</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>TimelinessOfCareNationalComparison</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[TimelinessOfCareNationalComparison]</local-name>
+              <parent-name>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</parent-name>
+              <remote-alias>TimelinessOfCareNationalComparison</remote-alias>
+              <ordinal>18</ordinal>
+              <family>ratings</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>7</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>EfficientUseOfMedicalImagingNationalComparison</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[EfficientUseOfMedicalImagingNationalComparison]</local-name>
+              <parent-name>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</parent-name>
+              <remote-alias>EfficientUseOfMedicalImagingNationalComparison</remote-alias>
+              <ordinal>19</ordinal>
+              <family>ratings</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>7</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Year</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[Year]</local-name>
+              <parent-name>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</parent-name>
+              <remote-alias>Year</remote-alias>
+              <ordinal>20</ordinal>
+              <family>ratings</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>5</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>state</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[state (Custom SQL Query2)]</local-name>
+              <parent-name>[_2744E27039A6433496B4F4C53EAE2A06]</parent-name>
+              <remote-alias>state</remote-alias>
+              <ordinal>21</ordinal>
+              <family>Custom SQL Query2</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>52</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_2744E27039A6433496B4F4C53EAE2A06]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>patientcount</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[patientcount (Custom SQL Query2)]</local-name>
+              <parent-name>[_2744E27039A6433496B4F4C53EAE2A06]</parent-name>
+              <remote-alias>patientcount</remote-alias>
+              <ordinal>22</ordinal>
+              <family>Custom SQL Query2</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>49</approx-count>
+              <contains-null>true</contains-null>
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_2744E27039A6433496B4F4C53EAE2A06]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>ranking</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[ranking (Custom SQL Query2)]</local-name>
+              <parent-name>[_2744E27039A6433496B4F4C53EAE2A06]</parent-name>
+              <remote-alias>ranking</remote-alias>
+              <ordinal>23</ordinal>
+              <family>Custom SQL Query2</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>49</approx-count>
+              <contains-null>true</contains-null>
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_2744E27039A6433496B4F4C53EAE2A06]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>state</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[state (Custom SQL Query3)]</local-name>
+              <parent-name>[_5E7D8B623C9547D4AAAF0039605D179B]</parent-name>
+              <remote-alias>state</remote-alias>
+              <ordinal>24</ordinal>
+              <family>Custom SQL Query3</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>56</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_5E7D8B623C9547D4AAAF0039605D179B]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>hospitaloverallrating</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[hospitaloverallrating]</local-name>
+              <parent-name>[_5E7D8B623C9547D4AAAF0039605D179B]</parent-name>
+              <remote-alias>hospitaloverallrating</remote-alias>
+              <ordinal>25</ordinal>
+              <family>Custom SQL Query3</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>6</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_5E7D8B623C9547D4AAAF0039605D179B]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>ranking</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[ranking]</local-name>
+              <parent-name>[_5E7D8B623C9547D4AAAF0039605D179B]</parent-name>
+              <remote-alias>ranking</remote-alias>
+              <ordinal>26</ordinal>
+              <family>Custom SQL Query3</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>6</approx-count>
+              <contains-null>true</contains-null>
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_5E7D8B623C9547D4AAAF0039605D179B]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>children</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[children]</local-name>
+              <parent-name>[_B4D561C7D27C41E2899CF70F160083B0]</parent-name>
+              <remote-alias>children</remote-alias>
+              <ordinal>27</ordinal>
+              <family>Custom SQL Query1</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>11</approx-count>
+              <contains-null>true</contains-null>
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_B4D561C7D27C41E2899CF70F160083B0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>age</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[age]</local-name>
+              <parent-name>[_B4D561C7D27C41E2899CF70F160083B0]</parent-name>
+              <remote-alias>age</remote-alias>
+              <ordinal>28</ordinal>
+              <family>Custom SQL Query1</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>72</approx-count>
+              <contains-null>true</contains-null>
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_B4D561C7D27C41E2899CF70F160083B0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>income</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[income]</local-name>
+              <parent-name>[_B4D561C7D27C41E2899CF70F160083B0]</parent-name>
+              <remote-alias>income</remote-alias>
+              <ordinal>29</ordinal>
+              <family>Custom SQL Query1</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>10000</approx-count>
+              <contains-null>true</contains-null>
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_B4D561C7D27C41E2899CF70F160083B0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>marital</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[marital]</local-name>
+              <parent-name>[_B4D561C7D27C41E2899CF70F160083B0]</parent-name>
+              <remote-alias>marital</remote-alias>
+              <ordinal>30</ordinal>
+              <family>Custom SQL Query1</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>5</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_B4D561C7D27C41E2899CF70F160083B0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Readmission</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[Readmission]</local-name>
+              <parent-name>[_B4D561C7D27C41E2899CF70F160083B0]</parent-name>
+              <remote-alias>Readmission</remote-alias>
+              <ordinal>31</ordinal>
+              <family>Custom SQL Query1</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>2</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_B4D561C7D27C41E2899CF70F160083B0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>gender</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[gender]</local-name>
+              <parent-name>[_B4D561C7D27C41E2899CF70F160083B0]</parent-name>
+              <remote-alias>gender</remote-alias>
+              <ordinal>32</ordinal>
+              <family>Custom SQL Query1</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>3</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_B4D561C7D27C41E2899CF70F160083B0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>initial_days</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[initial_days]</local-name>
+              <parent-name>[_B4D561C7D27C41E2899CF70F160083B0]</parent-name>
+              <remote-alias>initial_days</remote-alias>
+              <ordinal>33</ordinal>
+              <family>Custom SQL Query1</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>10000</approx-count>
+              <contains-null>true</contains-null>
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_B4D561C7D27C41E2899CF70F160083B0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>totalcharge</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[totalcharge]</local-name>
+              <parent-name>[_B4D561C7D27C41E2899CF70F160083B0]</parent-name>
+              <remote-alias>totalcharge</remote-alias>
+              <ordinal>34</ordinal>
+              <family>Custom SQL Query1</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>10000</approx-count>
+              <contains-null>true</contains-null>
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_B4D561C7D27C41E2899CF70F160083B0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>additional_charges</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[additional_charges]</local-name>
+              <parent-name>[_B4D561C7D27C41E2899CF70F160083B0]</parent-name>
+              <remote-alias>additional_charges</remote-alias>
+              <ordinal>35</ordinal>
+              <family>Custom SQL Query1</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>8404</approx-count>
+              <contains-null>true</contains-null>
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_B4D561C7D27C41E2899CF70F160083B0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>vitd_levels</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[vitd_levels]</local-name>
+              <parent-name>[_B4D561C7D27C41E2899CF70F160083B0]</parent-name>
+              <remote-alias>vitd_levels</remote-alias>
+              <ordinal>36</ordinal>
+              <family>Custom SQL Query1</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>10000</approx-count>
+              <contains-null>true</contains-null>
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_B4D561C7D27C41E2899CF70F160083B0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>doc_visits</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[doc_visits]</local-name>
+              <parent-name>[_B4D561C7D27C41E2899CF70F160083B0]</parent-name>
+              <remote-alias>doc_visits</remote-alias>
+              <ordinal>37</ordinal>
+              <family>Custom SQL Query1</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>10</approx-count>
+              <contains-null>true</contains-null>
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_B4D561C7D27C41E2899CF70F160083B0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>full_meals</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[full_meals]</local-name>
+              <parent-name>[_B4D561C7D27C41E2899CF70F160083B0]</parent-name>
+              <remote-alias>full_meals</remote-alias>
+              <ordinal>38</ordinal>
+              <family>Custom SQL Query1</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>8</approx-count>
+              <contains-null>true</contains-null>
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_B4D561C7D27C41E2899CF70F160083B0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>vitd_supp</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[vitd_supp]</local-name>
+              <parent-name>[_B4D561C7D27C41E2899CF70F160083B0]</parent-name>
+              <remote-alias>vitd_supp</remote-alias>
+              <ordinal>39</ordinal>
+              <family>Custom SQL Query1</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>6</approx-count>
+              <contains-null>true</contains-null>
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_B4D561C7D27C41E2899CF70F160083B0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>soft_drink</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[soft_drink]</local-name>
+              <parent-name>[_B4D561C7D27C41E2899CF70F160083B0]</parent-name>
+              <remote-alias>soft_drink</remote-alias>
+              <ordinal>40</ordinal>
+              <family>Custom SQL Query1</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>2</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_B4D561C7D27C41E2899CF70F160083B0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>HighBlood</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[HighBlood]</local-name>
+              <parent-name>[_B4D561C7D27C41E2899CF70F160083B0]</parent-name>
+              <remote-alias>HighBlood</remote-alias>
+              <ordinal>41</ordinal>
+              <family>Custom SQL Query1</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>2</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_B4D561C7D27C41E2899CF70F160083B0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>stroke</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[stroke]</local-name>
+              <parent-name>[_B4D561C7D27C41E2899CF70F160083B0]</parent-name>
+              <remote-alias>stroke</remote-alias>
+              <ordinal>42</ordinal>
+              <family>Custom SQL Query1</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>2</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_B4D561C7D27C41E2899CF70F160083B0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Zip</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[Zip]</local-name>
+              <parent-name>[_B4D561C7D27C41E2899CF70F160083B0]</parent-name>
+              <remote-alias>Zip</remote-alias>
+              <ordinal>43</ordinal>
+              <family>Custom SQL Query1</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>4668</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_B4D561C7D27C41E2899CF70F160083B0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>city</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[city]</local-name>
+              <parent-name>[_B4D561C7D27C41E2899CF70F160083B0]</parent-name>
+              <remote-alias>city</remote-alias>
+              <ordinal>44</ordinal>
+              <family>Custom SQL Query1</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>3283</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_B4D561C7D27C41E2899CF70F160083B0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>state</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[state (Custom SQL Query1)]</local-name>
+              <parent-name>[_B4D561C7D27C41E2899CF70F160083B0]</parent-name>
+              <remote-alias>state</remote-alias>
+              <ordinal>45</ordinal>
+              <family>Custom SQL Query1</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>50</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_B4D561C7D27C41E2899CF70F160083B0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>county</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[county]</local-name>
+              <parent-name>[_B4D561C7D27C41E2899CF70F160083B0]</parent-name>
+              <remote-alias>county</remote-alias>
+              <ordinal>46</ordinal>
+              <family>Custom SQL Query1</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>1473</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_B4D561C7D27C41E2899CF70F160083B0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>complication_risk</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[complication_risk]</local-name>
+              <parent-name>[_B4D561C7D27C41E2899CF70F160083B0]</parent-name>
+              <remote-alias>complication_risk</remote-alias>
+              <ordinal>47</ordinal>
+              <family>Custom SQL Query1</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>4</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_B4D561C7D27C41E2899CF70F160083B0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>initial_admission</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[initial_admission]</local-name>
+              <parent-name>[_B4D561C7D27C41E2899CF70F160083B0]</parent-name>
+              <remote-alias>initial_admission</remote-alias>
+              <ordinal>48</ordinal>
+              <family>Custom SQL Query1</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>3</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_B4D561C7D27C41E2899CF70F160083B0]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>state</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[state]</local-name>
+              <parent-name>[_EC981D23D983468F82A457906EBE31B5]</parent-name>
+              <remote-alias>state</remote-alias>
+              <ordinal>49</ordinal>
+              <family>Custom SQL Query</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>51</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_EC981D23D983468F82A457906EBE31B5]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>emergencyservicecount</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[emergencyservicecount]</local-name>
+              <parent-name>[_EC981D23D983468F82A457906EBE31B5]</parent-name>
+              <remote-alias>emergencyservicecount</remote-alias>
+              <ordinal>50</ordinal>
+              <family>Custom SQL Query</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>86</approx-count>
+              <contains-null>true</contains-null>
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_EC981D23D983468F82A457906EBE31B5]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>rank</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[rank]</local-name>
+              <parent-name>[_EC981D23D983468F82A457906EBE31B5]</parent-name>
+              <remote-alias>rank</remote-alias>
+              <ordinal>51</ordinal>
+              <family>Custom SQL Query</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>86</approx-count>
+              <contains-null>true</contains-null>
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[_EC981D23D983468F82A457906EBE31B5]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+          </metadata-records>
+        </connection>
+      </extract>
       <layout _.fcp.SchemaViewerObjectModel.false...dim-percentage='0.5' _.fcp.SchemaViewerObjectModel.false...measure-percentage='0.4' dim-ordering='alphabetic' measure-ordering='alphabetic' show-structure='true' />
       <semantic-values>
         <semantic-value key='[Country].[Name]' value='&quot;United States&quot;' />
@@ -993,6 +1896,31 @@ pcbs.state&#13;
    ,DENSE_RANK() OVER (ORDER BY pcbs.PatientCount DESC) AS Ranking&#13;
 FROM Patient_Count_By_States AS pcbs&#13;
 ORDER BY state ASC, Ranking DESC</relation>
+            </properties>
+            <properties context='extract'>
+              <relation name='_2744E27039A6433496B4F4C53EAE2A06' table='[Extract].[_2744E27039A6433496B4F4C53EAE2A06]' type='table' />
+            </properties>
+          </object>
+          <object caption='Hospital Overall Ranking Ranked Per State' id='_5E7D8B623C9547D4AAAF0039605D179B'>
+            <properties context=''>
+              <relation connection='postgres.0zyftyr0fbuin11dr4ezu0xt1z73' name='Custom SQL Query3' type='text'>WITH State_OverallRanking_By_State_And_Rating AS (&#13;
+SELECT rating.&quot;State&quot; AS State&#13;
+  ,rating.&quot;HospitalOverallRating&quot; AS HospitalOverallRating&#13;
+  ,COUNT(rating.&quot;HospitalOverallRating&quot;) AS HospitalOverallRatingCount&#13;
+FROM public.ratings AS rating&#13;
+GROUP BY  rating.&quot;State&quot;, rating.&quot;HospitalOverallRating&quot;&#13;
+ORDER BY rating.&quot;State&quot;&#13;
+)&#13;
+&#13;
+SELECT &#13;
+ sobsar.State&#13;
+,sobsar.HospitalOverallRating&#13;
+,RANK() OVER (PARTITION BY sobsar.State ORDER BY sobsar.HospitalOverallRatingCount) AS Ranking&#13;
+FROM State_OverallRanking_By_State_And_Rating AS sobsar&#13;
+ORDER BY sobsar.State ASC, Ranking DESC</relation>
+            </properties>
+            <properties context='extract'>
+              <relation name='_5E7D8B623C9547D4AAAF0039605D179B' table='[Extract].[_5E7D8B623C9547D4AAAF0039605D179B]' type='table' />
             </properties>
           </object>
           <object caption='Medical Data Complete Dataset' id='_B4D561C7D27C41E2899CF70F160083B0'>
@@ -1024,6 +1952,9 @@ INNER JOIN location AS l ON l.location_id = p.location_id&#13;
 INNER JOIN complication AS c ON c.complication_id = p.compl_id&#13;
 INNER JOIN admission AS admin ON admin.admins_id = p.admis_id</relation>
             </properties>
+            <properties context='extract'>
+              <relation name='_B4D561C7D27C41E2899CF70F160083B0' table='[Extract].[_B4D561C7D27C41E2899CF70F160083B0]' type='table' />
+            </properties>
           </object>
           <object caption='Emergency Services Count By State and Rank' id='_EC981D23D983468F82A457906EBE31B5'>
             <properties context=''>
@@ -1043,10 +1974,16 @@ FROM Emergency_Counts_By_State AS ecbs&#13;
 WHERE ecbs.State NOT IN (&apos;GU&apos;, &apos;PR&apos;, &apos;VI&apos;, &apos;MP&apos;, &apos;AS&apos;) --Exclude Territories&#13;
 ORDER BY ecbs.State, Rank</relation>
             </properties>
+            <properties context='extract'>
+              <relation name='_EC981D23D983468F82A457906EBE31B5' table='[Extract].[_EC981D23D983468F82A457906EBE31B5]' type='table' />
+            </properties>
           </object>
           <object caption='ratings' id='ratings_AAA3287E043A4CC48B5D33C90B7FDC59'>
             <properties context=''>
               <relation connection='postgres.0zyftyr0fbuin11dr4ezu0xt1z73' name='ratings' table='[public].[ratings]' type='table' />
+            </properties>
+            <properties context='extract'>
+              <relation name='ratings_AAA3287E043A4CC48B5D33C90B7FDC59' table='[Extract].[ratings_AAA3287E043A4CC48B5D33C90B7FDC59]' type='table' />
             </properties>
           </object>
         </objects>
@@ -1058,6 +1995,14 @@ ORDER BY ecbs.State, Rank</relation>
             </expression>
             <first-end-point object-id='ratings_AAA3287E043A4CC48B5D33C90B7FDC59' />
             <second-end-point object-id='_2744E27039A6433496B4F4C53EAE2A06' />
+          </relationship>
+          <relationship>
+            <expression op='='>
+              <expression op='[State]' />
+              <expression op='[state (Custom SQL Query3)]' />
+            </expression>
+            <first-end-point object-id='ratings_AAA3287E043A4CC48B5D33C90B7FDC59' />
+            <second-end-point object-id='_5E7D8B623C9547D4AAAF0039605D179B' />
           </relationship>
           <relationship>
             <expression op='='>
@@ -1097,7 +2042,7 @@ ORDER BY ecbs.State, Rank</relation>
       <table>
         <view>
           <datasources>
-            <datasource caption='Medical' name='federated.0vuhybs1jy3s2n125jvuc1gcwtfr' />
+            <datasource caption=' Medical Data And Ratings' name='federated.0vuhybs1jy3s2n125jvuc1gcwtfr' />
           </datasources>
           <mapsources>
             <mapsource name='Tableau' />
@@ -1166,7 +2111,7 @@ ORDER BY ecbs.State, Rank</relation>
       <table>
         <view>
           <datasources>
-            <datasource caption='Medical' name='federated.0vuhybs1jy3s2n125jvuc1gcwtfr' />
+            <datasource caption=' Medical Data And Ratings' name='federated.0vuhybs1jy3s2n125jvuc1gcwtfr' />
           </datasources>
           <mapsources>
             <mapsource name='Tableau' />
