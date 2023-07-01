@@ -5,6 +5,8 @@
  Performance Assesment: SLM1 — TASK 1: DATA ANALYSIS - Advanced Acquisition - D211
  Description:
  	This script will count the number of emergencies service count per state and rank them.
+	
+	NOTE: This will be excluding U.S. territories.
 */
 WITH Emergency_Counts_By_State AS (
 	SELECT 
