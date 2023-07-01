@@ -19,6 +19,5 @@ SELECT ecbs.State
       ,ecbs.EmergencyServiceCount
 	  ,DENSE_RANK() OVER(ORDER BY ecbs.EmergencyServiceCount DESC) AS Rank
 FROM Emergency_Counts_By_State AS ecbs
+WHERE ecbs.State NOT IN ('GU', 'PR', 'VI', 'MP', 'AS') --Exclude Territories
 ORDER BY ecbs.State, Rank
-
-
