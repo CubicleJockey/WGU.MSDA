@@ -14,8 +14,7 @@ Example Execution on WGU OnDemand Lab Environment (Windows PowerShell ISE):
 
 
 '''
-import subprocess
-import sys
+import subprocess, sys, os
 from typing import List, Tuple
 from collections import namedtuple
 
@@ -56,6 +55,9 @@ except ImportError:
 '''
 assert len(sys.argv) >  2, 'PostgreSQL Username and Password must be supplied'
 
+script_name = os.path.basename(__file__)
+generated_sql = [f'D211 - Generated SQL from script {script_name}']
+
 def extract_user_paramters(userArgs: List[str]) -> Tuple[str, str]:
      for param in userArgs:
          if 'u:' in param:
@@ -80,9 +82,12 @@ def create_database(user: str, password: str) -> None:
     
     # Configure database table
     conn.autocommit = True
-    cur.execute('DROP DATABASE IF EXISTS hospital_ratings;')
-    
-    cur.execute('''
+    drop_database_statement = 'DROP DATABASE IF EXISTS hospital_ratings;'
+    generated_sql.append(drop_database_statement)
+
+    cur.execute(drop_database_statement)
+
+    create_database_statement = '''
     CREATE DATABASE hospital_ratings
         WITH
         OWNER = postgres
@@ -92,7 +97,11 @@ def create_database(user: str, password: str) -> None:
         TABLESPACE = pg_default
         CONNECTION LIMIT = -1
         IS_TEMPLATE = False;
-    ''')
+    '''
+
+    generated_sql.append(create_database_statement)
+
+    cur.execute(create_database_statement)
     
     # Retrieve query results
     #records = cur.fetchall()
@@ -175,6 +184,8 @@ def extract_csv_to_table(user: str, password: str) -> None:
     print(ratings.info())
 
     drop_table_statement = f'DROP TABLE IF EXISTS {table_name};'
+    generated_sql.append(drop_table_statement)
+
     cur.execute(drop_table_statement)
     #conn.commit()
 
@@ -182,6 +193,8 @@ def extract_csv_to_table(user: str, password: str) -> None:
     #print(formatted_columns)
 
     create_table_statement = f"CREATE TABLE {table_name}({formatted_table_create_columns});"
+    generated_sql.append(create_table_statement)
+
     #print(create_table_statement)
     cur.execute(create_table_statement)
     #conn.commit()
@@ -192,22 +205,38 @@ def extract_csv_to_table(user: str, password: str) -> None:
         INSERT INTO ratings({insert_columns})
         VALUES(%s, %s, %s, %s,  %s,  %s,  %s,  %s,  %s,  %s,  %s,  %s,  %s,  %s,  %s,  %s,  %s,  %s,  %s,  %s,  %s);
         '''
-        cur.execute(insert_statement,
-                    (row['FacilityID'], row['FacilityName'], row['Address'], row['City'], row['State'],
-                     row['ZipCode'], row['CountyName'], row['Phone'], row['HospitalType'], row['HospitalOwnership'],
-                     row['EmergencyServices'], row['MeetsCriteriaForInteropEHRs'], row['HospitalOverallRating'],
-                     row['MortalityNationalComparison'], row['SafetyOfCareNationalComparison'], row['ReadmissionNationalComparison'],
-                     row['PatientExperienceNationalComparison'], row['EffectivenessOfCareNationalComparison'], row['TimelinessOfCareNationalComparison'],
-                     row['EfficientUseOfMedicalImagingNationalComparison'], row['Year']))
+
+        insert_values = (row['FacilityID'], row['FacilityName'], row['Address'], row['City'], row['State'],
+                row['ZipCode'], row['CountyName'], row['Phone'], row['HospitalType'], row['HospitalOwnership'],
+                row['EmergencyServices'], row['MeetsCriteriaForInteropEHRs'], row['HospitalOverallRating'],
+                row['MortalityNationalComparison'], row['SafetyOfCareNationalComparison'], row['ReadmissionNationalComparison'],
+                row['PatientExperienceNationalComparison'], row['EffectivenessOfCareNationalComparison'], row['TimelinessOfCareNationalComparison'],
+                row['EfficientUseOfMedicalImagingNationalComparison'], row['Year'])
+
+        generated_sql.append(insert_statement % insert_values)
+
+        cur.execute(insert_statement, insert_values)
 
 
     cur.close()
     conn.close()
-    
+
 '''
 Execute Program    
 '''
 user, password = extract_user_paramters(sys.argv)
 create_database(user, password)
 extract_csv_to_table(user, password)
+
+
+generated_sql_file = '.\wgu-generated-sql-for-additional-dataset.sql'
+
+with open(generated_sql_file, 'w') as file:
+    for statement in generated_sql:
+        file.write(f'{str(statement)}\n')
+
+print(f'The PostgreSQL that was generated during this script run can be found at: {generated_sql_file}')
+
+#print(generated_sql)
+
 #execute_pgcsv(user, password)
