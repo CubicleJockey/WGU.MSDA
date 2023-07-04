@@ -56,7 +56,12 @@ except ImportError:
 assert len(sys.argv) >  2, 'PostgreSQL Username and Password must be supplied'
 
 script_name = os.path.basename(__file__)
-generated_sql = [f'D211 - Generated SQL from script {script_name}']
+generated_sql = [f'''\*
+
+D211 - Generated SQL from script {script_name}
+
+*/
+''']
 
 def extract_user_paramters(userArgs: List[str]) -> Tuple[str, str]:
      for param in userArgs:
@@ -83,20 +88,21 @@ def create_database(user: str, password: str) -> None:
     # Configure database table
     conn.autocommit = True
     drop_database_statement = 'DROP DATABASE IF EXISTS hospital_ratings;'
-    generated_sql.append(drop_database_statement)
+    generated_sql.append(f'{drop_database_statement}\n')
 
     cur.execute(drop_database_statement)
 
     create_database_statement = '''
-    CREATE DATABASE hospital_ratings
-        WITH
-        OWNER = postgres
-        ENCODING = 'UTF8'
-        LC_COLLATE = 'English_United States.1252'
-        LC_CTYPE = 'English_United States.1252'
-        TABLESPACE = pg_default
-        CONNECTION LIMIT = -1
-        IS_TEMPLATE = False;
+CREATE DATABASE hospital_ratings
+    WITH
+    OWNER = postgres
+    ENCODING = 'UTF8'
+    LC_COLLATE = 'English_United States.1252'
+    LC_CTYPE = 'English_United States.1252'
+    TABLESPACE = pg_default
+    CONNECTION LIMIT = -1
+    IS_TEMPLATE = False;
+
     '''
 
     generated_sql.append(create_database_statement)
@@ -184,7 +190,7 @@ def extract_csv_to_table(user: str, password: str) -> None:
     print(ratings.info())
 
     drop_table_statement = f'DROP TABLE IF EXISTS {table_name};'
-    generated_sql.append(drop_table_statement)
+    generated_sql.append(f'{drop_table_statement}\n')
 
     cur.execute(drop_table_statement)
     #conn.commit()
@@ -193,7 +199,7 @@ def extract_csv_to_table(user: str, password: str) -> None:
     #print(formatted_columns)
 
     create_table_statement = f"CREATE TABLE {table_name}({formatted_table_create_columns});"
-    generated_sql.append(create_table_statement)
+    generated_sql.append(f'{create_table_statement}\n')
 
     #print(create_table_statement)
     cur.execute(create_table_statement)
@@ -201,7 +207,7 @@ def extract_csv_to_table(user: str, password: str) -> None:
 
     insert_columns = ', '.join([f'"{column}"' for column in adjusted_columns])
     for _, row in ratings.iterrows():
-        insert_statement = f'''
+        insert_statement =f'''
         INSERT INTO ratings({insert_columns})
         VALUES(%s, %s, %s, %s,  %s,  %s,  %s,  %s,  %s,  %s,  %s,  %s,  %s,  %s,  %s,  %s,  %s,  %s,  %s,  %s,  %s);
         '''
@@ -213,7 +219,12 @@ def extract_csv_to_table(user: str, password: str) -> None:
                 row['PatientExperienceNationalComparison'], row['EffectivenessOfCareNationalComparison'], row['TimelinessOfCareNationalComparison'],
                 row['EfficientUseOfMedicalImagingNationalComparison'], row['Year'])
 
-        generated_sql.append(insert_statement % insert_values)
+
+        adjusted_values_for_output = tuple(s.replace("'", "''") if isinstance(s, str) else s for s in insert_values)
+
+        generated_sql.append(f'''INSERT INTO ratings({insert_columns})
+VALUES(%s, '%s', '%s', '%s',  '%s', %s,  '%s',  '%s',  '%s',  '%s',  %s,  %s,  '%s',  '%s',  '%s',  '%s',  '%s',  '%s',  '%s',  '%s',  %s);
+        ''' % adjusted_values_for_output)
 
         cur.execute(insert_statement, insert_values)
 
