@@ -2184,8 +2184,8 @@ ORDER BY ecbs.State, Rank</relation>
           </relationship>
           <relationship>
             <expression op='='>
-              <expression op='[ZipCode]' />
-              <expression op='[Zip]' />
+              <expression op='[State]' />
+              <expression op='[state (Custom SQL Query1)]' />
             </expression>
             <first-end-point object-id='ratings_AAA3287E043A4CC48B5D33C90B7FDC59' />
             <second-end-point object-id='_B4D561C7D27C41E2899CF70F160083B0' />
@@ -2484,16 +2484,7 @@ ORDER BY ecbs.State, Rank</relation>
                       </worksheet>
                     </capturedDeltas>
                   </story-point>
-                  <story-point caption='Hospital Overall-Rsating Ranked per State' captured-sheet='Hospital Overall Ratings Ranked Per State' id='3'>
-                    <currentDeltas>
-                      <worksheet name='Hospital Overall Ratings Ranked Per State'>
-                        <filter class='categorical' column='[federated.0vuhybs1jy3s2n125jvuc1gcwtfr].[none:hospitaloverallrating:nk]'>
-                          <groupfilter function='member' level='[none:hospitaloverallrating:nk]' member='&quot;5&quot;' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
-                        </filter>
-                      </worksheet>
-                    </currentDeltas>
-                    <capturedDeltas />
-                  </story-point>
+                  <story-point caption='Hospital Overall-Rsating Ranked per State' captured-sheet='Hospital Overall Ratings Ranked Per State' id='3' />
                 </story-points>
               </flipboard>
             </zone>
@@ -2611,7 +2602,7 @@ ORDER BY ecbs.State, Rank</relation>
     </window>
     <window class='dashboard' maximized='true' name='Executive Follow-Up'>
       <viewpoints />
-      <active id='6' />
+      <active id='-1' />
       <simple-id uuid='{292ABE46-B153-4D98-922E-074792452882}' />
     </window>
   </windows>
