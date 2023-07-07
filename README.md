@@ -5,18 +5,18 @@
 #### Courses
 
 * Data Analytics
-  * D204 - The Data Analytics Journery
-  * D206 - Data Cleaning
-  * D207 - Exploratory Data Analysis
-  * D208 - Predictive Modeling
-  * D213 - Advanced Data Analytics
+  * D204 - The Data Analytics Journery *(Objective Assessment)*
+  * D206 - Data Cleaning *(Performance Assessment)*
+  * D207 - Exploratory Data Analysis *(Performance Assessment)*
+  * D208 - Predictive Modeling *(Performance Assessment)*
+  * D213 - Advanced Data Analytics *(Performance Assessment)*
 * Data Management
-  * D205 - Data Acquisition
-  * D211 - Advanced Data Acquisition
+  * D205 - Data Acquisition *(Performance Assessment)*
+  * D211 - Advanced Data Acquisition *(Performance Assessment)*
 * Data Mining
-  * D209 - Data Mining I
-  * D212 - Data Mining II
+  * D209 - Data Mining I *(Performance Assessment)*
+  * D212 - Data Mining II *(Performance Assessment)*
 * Data Visualization
-  * D210 - Representation and Reporting
+  * D210 - Representation and Reporting *(Performance Assessment)*
 * Capstone
-  * D214 - Data Analytics Graduate Capstone
+  * D214 - Data Analytics Graduate Capstone *(Performance Assessment)*
