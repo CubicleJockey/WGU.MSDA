@@ -5,7 +5,7 @@
 #### Courses
 
 * Data Analytics
-  * D204 - The Data Analytics Journery -- *(Objective Assessment)*
+  * D204 - The Data Analytics Journey -- *(Objective Assessment)*
   * D206 - Data Cleaning  -- *(Performance Assessment)*
   * D207 - Exploratory Data Analysis  -- *(Performance Assessment)*
   * D208 - Predictive Modeling  -- *(Performance Assessment)*
