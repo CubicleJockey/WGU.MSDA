@@ -20,3 +20,10 @@
   * D210 - Representation and Reporting --  *(Performance Assessment)*
 * Capstone
   * D214 - Data Analytics Graduate Capstone --  *(Performance Assessment)*
+
+
+
+##### Student Information :
+> ***Name:*** André Davis <br />
+> ***Student ID:*** 010630641 <br />
+> ***Program:*** MSDA - Master's in Data Analytics
