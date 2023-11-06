@@ -1,5 +1,5 @@
 ![WGU Washington Logo](./Images/WGU-Washington-Logo.png)
-###### Western Governors University - Master's in Data Analytics
+### Western Governors University - Master's in Data Analytics
 
 <hr />
 
