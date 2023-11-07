@@ -52,3 +52,9 @@
 8.	Cite a study of your subject or similar subject that used the method you are planning to use. (Context and Project Outcome).
 9.	Justification is about what other researchers say about the tool you chose, e.g., R v. SAS, R v. Python. 
        * It is about expert opinion.
+
+
+# Capstones Excellence Award:
+> Do something or use a package that hasn't been used in the program.
+ * [Polars](https://www.pola.rs/)
+ * [PyTimeTk](https://github.com/business-science/pytimetk)
