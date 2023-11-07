@@ -13,7 +13,7 @@
          - [t-test](https://en.wikipedia.org/wiki/Student's_t-test)
          - [z-test](https://en.wikipedia.org/wiki/Z-test)
          - [ANOVA](https://en.wikipedia.org/wiki/Analysis_of_variance)
-         - [Regression analysis](https://en.wikipedia.org/wiki/Regression_analysis)
+         - [Regression Analysis](https://en.wikipedia.org/wiki/Regression_analysis)
          - [Kruskal-Wallis](https://en.wikipedia.org/wiki/Kruskal%E2%80%93Wallis_one-way_analysis_of_variance)
          - [Wilcoxon](https://en.wikipedia.org/wiki/Wilcoxon_signed-rank_test)
          - [Chi-Square](https://en.wikipedia.org/wiki/Chi-squared_test)
@@ -39,14 +39,14 @@
          * factors for loan approval
          * production costs
          * transportation charges
-         * significant group differences in terms of valuation or market share.
+         * significant group differences in terms of valuation or market share
 2.	Social conditions, avocations, or non-business problems are `NOT SUITABLE` for Capstone study.
 3.	Must have in-text citation per section of your Proposal.
 4.	Limitations are constraints placed upon the researcher.  
        * Spell them out.
 5.	Delimitations are constraints the researcher places upon the study.
        * Spell them out.
-6.	The data table is required because it demonstrates to the committee the independent variables (IVs) intended for study as opposed to all IVs.
+6.	The data table is required because it demonstrates to the committee the `independent variables` (IVs) intended for study as opposed to all IVs.
 7. 	Use statistical terminology throughout the proposal.  
        * The title should state the principal statistical method being used.
 8.	Cite a study of your subject or similar subject that used the method you are planning to use. (Context and Project Outcome).
