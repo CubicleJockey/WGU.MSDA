@@ -54,7 +54,9 @@
        * It is about expert opinion.
 
 
-# Capstones Excellence Award:
+# Attempt Capstones Excellence Award:
 > Do something or use a package that hasn't been used in the program.
+
+##### Possible Packages:
  * [Polars](https://www.pola.rs/)
  * [PyTimeTk](https://github.com/business-science/pytimetk)
