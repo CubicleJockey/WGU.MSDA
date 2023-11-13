@@ -1,18 +1,18 @@
 # Spam Email Classification Dataset
 
 **DataSet Source:** [Kaggle - Dataset](https://www.kaggle.com/datasets/purusinghvi/email-spam-classification-dataset)
-**License:** MIT
+**License:** [MIT](https://opensource.org/license/mit/)
 
 
 >Introduction
 > 
->This is a csv file containing 83446 records of email which are labelled as either spam or not-spam. It is formed by combining the 2007 TREC Public Spam Corpus and Enron-Spam Dataset.
+>This is a csv file containing ***83446*** records of email which are labelled as either spam or not-spam. It is formed by combining the 2007 TREC Public Spam Corpus and Enron-Spam Dataset.
 >
 >Columns
 > 
 > 1. label
 >   * '1' indicates that the email is classified as spam.
->   * '0' denotes that the email is legitimate (ham).
+>   * '0' denotes that the email is legitimate *(ham)*.
 > 2. text
 >   * This column contains the actual content of the email messages.
 >   
