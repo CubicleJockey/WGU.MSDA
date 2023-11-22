@@ -12,7 +12,7 @@ print(f"Current Python Version: {sys.version}")
 
 path = Path(__file__).parent.resolve()
 print(path)
-file = os.path.join(path, './medical_raw_data.csv')
+file = os.path.join(path, 'medical_raw_data.csv')
 
 use_columns = range(1, 53) #Skip first column
 medical_data = pd.read_csv(file, header = 0, usecols = use_columns)
