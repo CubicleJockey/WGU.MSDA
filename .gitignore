@@ -153,10 +153,10 @@ cython_debug/
 /.idea/*
 Classes/.DS_Store
 Classes/D210 - Representation and Reporting/.DS_Store
-Classes/D210 - Representation and Reporting/DataCamp/.DS_Store
-Classes/D210 - Representation and Reporting/DataCamp/Workbooks/.DS_Store
+Classes/D210 - Representation and Reporting/Data/datacamp/.DS_Store
+Classes/D210 - Representation and Reporting/Data/datacamp/Workbooks/.DS_Store
 .DS_Store
-Classes/D210 - Representation and Reporting/DataCamp/Workbooks/.DS_Store
+Classes/D210 - Representation and Reporting/Data/datacamp/Workbooks/.DS_Store
 /Classes/.idea/
 Classes/D211 - Advanced Data Acquisition/~$11-advanced-data-aquisition-task1-slm1-data-analysis.docx
 *.tmp
