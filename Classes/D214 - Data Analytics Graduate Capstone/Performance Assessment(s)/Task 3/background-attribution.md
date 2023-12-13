@@ -1,0 +1,2 @@
+## Presentation Background Attribution
+<a href="https://www.freepik.com/free-vector/abstract-big-data-technology-concept-background-design_6512252.htm#query=data%20analytics%20background&position=3&from_view=keyword&track=ais&uuid=376695f6-3701-4500-be9a-83062cd45fd3">Image by starline</a> on Freepik

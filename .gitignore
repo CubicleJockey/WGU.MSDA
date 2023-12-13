@@ -160,3 +160,5 @@ Classes/D210 - Representation and Reporting/Data/datacamp/Workbooks/.DS_Store
 /Classes/.idea/
 Classes/D211 - Advanced Data Acquisition/~$11-advanced-data-aquisition-task1-slm1-data-analysis.docx
 *.tmp
+~*.pptx
+~*.docx
