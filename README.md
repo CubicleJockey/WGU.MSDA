@@ -32,5 +32,4 @@
 
 ##### Student Information :
 > ***Name:*** André Davis <br />
-> ***Student ID:*** 010630641 <br />
 > ***Program:*** MSDA - Master's in Data Analytics
